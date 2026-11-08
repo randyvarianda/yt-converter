@@ -199,7 +199,7 @@ Confirmed rejections from the user: mushy, low-contrast neumorphism (same-colour
 A near-monochrome metal palette with two lit accents: ice-blue phosphor inside the glass, saturated blue LED on the plate.
 
 ### Primary
-- **Indicator Blue** (`led-on`): the LED pip on every latched key, the power LED, the transport key's ready/busy LED, keyboard focus rings and text selection. It is the only saturated colour on the metal. Always carries its glow (`--led-glow`, 65% of itself) and a radial hot spot (`#cfe3ff` at 40%/35%).
+- **Indicator Blue** (`led-on`): the LED pip on every latched key, the power LED, the transport key's lit icon, keyboard focus rings and text selection. It is the only saturated colour on the metal. Always carries its glow (`--led-glow`, 65% of itself) and a radial hot spot (`#cfe3ff` at 40%/35%).
 
 ### Secondary
 - **Ice Phosphor** (`vfd`): all text and segments inside the display glass: link input, caret, video title, readouts, lit meter segments, file names, eject and clear keys. Its derived steps do the hierarchy: **Dim Phosphor** (`vfd-dim`, 62%) for labels, placeholders and secondary meta; **Ghost Segment** (`vfd-ghost`, 7%) for unlit seven-segment digits and unlit meter cells. Inside the glass, hairlines run at 12–18% of Ice Phosphor, key outlines at 30–35%, and fills at 6–14%.
@@ -248,11 +248,11 @@ A near-monochrome metal palette with two lit accents: ice-blue phosphor inside t
 
 ## Layout
 
-One centred faceplate, max 920px wide, on a full-height desk with 40px/16px page padding. Inside the plate: a header row (power LED, brand legend, model line pushed right), then the **deck**, a two-column grid of the display window (fluid) and a 168px transport column, 18px apart, then the **bank**, separated by an engraved rule (dark 1px line with highlight beneath), holding the key groups in a wrapping row with 18px row and 26px column gaps. The quality hint takes the full bank width under the groups.
+One centred faceplate, max 920px wide, on a full-height desk with 40px/16px page padding. Inside the plate: a header row (power LED, brand legend, model line pushed right), then the **deck**, a two-column grid of the display window (fluid) and a 168px transport column, 18px apart, then the **bank**, separated by an engraved rule (dark 1px line with highlight beneath), holding the key groups in a wrapping row with 18px row and 26px column gaps. A bottom row spans the bank: the quality hint on the left, the engraved destination note ("Saves to Downloads › YouTube Converter › …") pushed right. The MP4 resolution group is hidden entirely while MP4 is off.
 
 Spacing moves in small physical steps: 6px between keys, 8–12px inside the glass, 14–18px between major regions. The glass is a vertical flex stack with 12px gaps; the readout, run block, file list and error each push to the bottom of the glass (`margin-top: auto`) so the lower edge of the display is where results appear.
 
-At 760px and below the deck stacks to one column, the plate padding tightens to 14px, the model line is dropped, the glass loses its 236px minimum height, the transport key becomes a 64px horizontal bar with its LED moved to the top-left corner as an 8px round pip, and each key well and its keys stretch to full width with keys sharing it equally.
+At 760px and below the deck stacks to one column, the plate padding tightens to 14px, the model line is dropped, the glass loses its 236px minimum height, the transport key becomes a 64px horizontal bar, the destination note wraps under the hint left-aligned, and each key well and its keys stretch to full width with keys sharing it equally.
 
 ## Elevation & Depth
 
@@ -274,7 +274,7 @@ Depth is physical and stacked: the plate sits on the desk, keys stand on the pla
 
 ## Shapes
 
-Machined, gently radiused rectangles; nothing is pill-shaped or circular except LEDs. Radii scale with object size: meter cells 1px, LED bars 2px, thumbnail and file tags 3px, eject key 5px, keys and glass 6px, wells and window bezel 9px, transport key 10px, faceplate 14px. Inner radii are kept tighter than their container so nested parts read as fitted. LED pips are 14×4px bars on keys (34×5px on the transport key) and 8px circles for the power LED and the compact transport LED. Inside the glass, divisions are 1px phosphor hairlines, not boxes.
+Machined, gently radiused rectangles; nothing is pill-shaped or circular except LEDs. Radii scale with object size: meter cells 1px, LED bars 2px, thumbnail and file tags 3px, eject key 5px, keys and glass 6px, wells and window bezel 9px, transport key 10px, faceplate 14px. Inner radii are kept tighter than their container so nested parts read as fitted. LED pips are 14×4px bars on keys and an 8px circle for the power LED. Inside the glass, divisions are 1px phosphor hairlines, not boxes.
 
 ## Components
 
@@ -293,10 +293,9 @@ Tactile, decisive, latching. The core control of the system.
 - A group whose format is off dims to 70% and its LEDs go out, but stays pressable; pressing a preset there latches its format too.
 
 ### Transport Key
-- The single big action: fills the 168px transport column, at least 150px tall, `rounded.transport`, 30px download icon, uppercase wide-tracked label, long LED bar on top.
-- **Ready:** LED lit steady. **Busy:** LED blinks at 1s `steps(1)` and the label reads "Working". **Disabled** until a video is looked up.
-- An engraved Fine-size destination note sits centred beneath it.
-- Compact: 64px horizontal bar, icon 22px, LED as an 8px round pip in the top-left corner.
+- The single big action: fills the 168px transport column, at least 150px tall, `rounded.transport`, 30px download icon, uppercase wide-tracked label. No separate LED: the download icon itself is the indicator, drawn as unlit grey lines (`led-off`) and lit as glowing Indicator Blue lines (two stacked drop-shadows on a wrapper, since the icon is masked).
+- **Ready:** icon lit steady. **Busy:** icon blinks at 1s `steps(1)` and the label reads "Working". **Disabled** until a video is looked up.
+- Compact: 64px horizontal bar, icon 22px.
 
 ### Display Window (signature component)
 - A bezel ring (9px radius, 4px) holding the black glass (6px radius), min 236px tall on desktop, with a faint top-left phosphor bloom and a diagonal reflection.
