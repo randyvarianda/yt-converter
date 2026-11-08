@@ -36,6 +36,8 @@
   --led-off: #9a9ea5;
   --led-on: #2f86ff;
   --led-glow: rgb(47 134 255 / .65);
+  --led-ok: #2bd47d;
+  --led-ok-glow: rgb(43 212 125 / .6);
   --glass: #060b0d;
   --glass-edge: #000;
   --vfd: #a6e6ff;
@@ -309,7 +311,15 @@ body {
   background: var(--led-off); opacity: .6;
   transform: rotate(calc(var(--n) * 15deg)) translateY(calc(var(--r) * -1));
 }
-.ring i.lit, .dial.ready .ring i { background: var(--led-on); opacity: 1; box-shadow: 0 0 6px var(--led-glow); }
+.ring i.lit { background: var(--led-on); opacity: 1; box-shadow: 0 0 6px var(--led-glow); }
+/* At rest the ring is one continuous blue line; segments appear only while converting. */
+.ring::before {
+  content: ""; position: absolute; border-radius: 50%;
+  inset: calc(var(--size) / 2 - var(--r) - 2px);
+  border: 3px solid var(--led-on); opacity: .45;
+}
+.dial.ready .ring::before { opacity: 1; box-shadow: 0 0 8px var(--led-glow), inset 0 0 6px var(--led-glow); }
+.dial.busy .ring::before, .dial:not(.busy) .ring i { display: none; }
 .dial.sweep .ring i { animation: ring-sweep 1.2s steps(1) infinite; animation-delay: calc(var(--n) * 50ms); }
 @keyframes ring-sweep { 0%, 8% { background: var(--led-on); opacity: 1; box-shadow: 0 0 6px var(--led-glow); } 9%, 100% { background: var(--led-off); opacity: .6; box-shadow: none; } }
 .knob {
@@ -336,6 +346,9 @@ body {
 /* drop-shadow sits on the wrapper because the icon itself is masked */
 .glyph { display: inline-flex; color: var(--led-off); }
 .dial.ready .glyph, .dial.busy .glyph { color: var(--led-on); filter: drop-shadow(0 0 2px var(--led-glow)) drop-shadow(0 0 7px var(--led-glow)); }
+/* Done: the icon becomes a check glowing green until the next lookup or conversion. */
+.dial.done .glyph { color: var(--led-ok); filter: drop-shadow(0 0 2px var(--led-ok-glow)) drop-shadow(0 0 7px var(--led-ok-glow)); }
+.dial.done .glyph .icon { --src: url(icons/check.svg); }
 .transport .legend { letter-spacing: .2em; }
 @keyframes blink { 50% { opacity: .25; } }
 .dest { font-size: 12px; color: var(--engrave-soft); text-shadow: 0 1px 0 var(--engrave-hi); }
@@ -480,7 +493,7 @@ body {
 const $ = (id) => document.getElementById(id);
 const MP3 = [["128", "128"], ["192", "192"], ["320", "320"]];
 const SEGMENTS = 32;
-const state = { info: null, formats: new Set(["mp3"]), quality: { mp3: "192", mp4: "1080" }, busy: false, infoReq: 0 };
+const state = { done: false, info: null, formats: new Set(["mp3"]), quality: { mp3: "192", mp4: "1080" }, busy: false, infoReq: 0 };
 
 const RING = 24;
 $("ring").replaceChildren(...Array.from({ length: RING }, (_, n) => {
@@ -578,6 +591,7 @@ function renderControls() {
   btn.disabled = !state.info || state.busy;
   $("dial").classList.toggle("ready", !!state.info && !state.busy);
   $("dial").classList.toggle("busy", state.busy);
+  $("dial").classList.toggle("done", state.done && !state.busy);
   if (!state.busy) { $("dial").classList.remove("sweep"); setRing(0); }
   $("convert-label").textContent = state.busy ? "Working" : "Convert";
 }
@@ -591,6 +605,7 @@ $("formats").addEventListener("click", (e) => {
 });
 
 function resetOutput() {
+  state.done = false;
   $("error").hidden = true; $("files").hidden = true; $("progress").hidden = true;
   $("readout").hidden = false;
 }
@@ -714,6 +729,7 @@ async function convert() {
     } while (job.phase !== "done" && job.phase !== "error");
     if (job.phase === "error") throw new Error(job.error);
     setStatus(job.files.length > 1 ? "Both files saved" : "Saved");
+    state.done = true;
   } catch (err) {
     $("error-msg").textContent = job?.files?.length
       ? `${err.message} (${job.files.map((f) => f.format.toUpperCase()).join(", ")} was saved.)`

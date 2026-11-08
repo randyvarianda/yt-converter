@@ -294,8 +294,9 @@ Tactile, decisive, latching. The core control of the system.
 
 ### Transport Knob (LED-ring)
 - The single big action: a round push-knob (156px dial, 112px compact) centred in the 168px transport column, with the engraved legend "Convert" (reads "Working" while busy) beneath it (beside it on compact).
-- **Ring:** 24 LED segments (4×11px, 8px compact) set radially in a recessed circular well around the knob. The ring is both the indicator and the job meter: unlit grey (`led-off` at 60%) with no video; fully lit Indicator Blue with glow when ready; while converting it fills clockwise from 12 o'clock with the whole job's progress (all formats, not just the current one); during start, encode and merge a single lit segment chases round it in 50ms `steps(1)` hops.
-- **Knob face:** machined concentric hairlines over a radial key gradient, hard 1px edge, 3px side wall; presses 2px at 90ms `steps(2)`. The download icon in its centre is grey when idle and glowing blue lines when ready or busy.
+- **Ring:** at rest it is one continuous 3px Indicator Blue circle in a recessed circular well: dimmed (45%, no glow) with no video, full strength with glow when ready. While converting it switches to 24 LED segments (4×11px, 8px compact) that fill clockwise from 12 o'clock with the whole job's progress (all formats, not just the current one); during start, encode and merge a single lit segment chases round it in 50ms `steps(1)` hops.
+- **Done:** after a successful conversion the centre icon becomes a check glowing Done Green (`led-ok` #2bd47d) while the ring returns to steady blue; it stays until the next lookup, clear or conversion.
+- **Knob face:** machined concentric hairlines over a radial key gradient, hard 1px edge, 3px side wall; presses 2px at 90ms `steps(2)`. The download icon in its centre is grey when idle, glowing blue lines when ready or busy, and a green check when done.
 - **Disabled** until a video is looked up; focus is a 2px ring offset 4px, following the round shape.
 
 ### Display Window (signature component)
