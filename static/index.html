@@ -316,9 +316,10 @@ body {
 .ring::before {
   content: ""; position: absolute; border-radius: 50%;
   inset: calc(var(--size) / 2 - var(--r) - 2px);
-  border: 3px solid var(--led-on); opacity: .45;
+  border: 3px solid var(--led-off);
 }
-.dial.ready .ring::before { opacity: 1; box-shadow: 0 0 8px var(--led-glow), inset 0 0 6px var(--led-glow); }
+.dial.ready .ring::before { border-color: var(--led-on); box-shadow: 0 0 8px var(--led-glow), inset 0 0 6px var(--led-glow); }
+.dial.done .ring::before { border-color: var(--led-ok); box-shadow: 0 0 8px var(--led-ok-glow), inset 0 0 6px var(--led-ok-glow); }
 .dial.busy .ring::before, .dial:not(.busy) .ring i { display: none; }
 .dial.sweep .ring i { animation: ring-sweep 1.2s steps(1) infinite; animation-delay: calc(var(--n) * 50ms); }
 @keyframes ring-sweep { 0%, 8% { background: var(--led-on); opacity: 1; box-shadow: 0 0 6px var(--led-glow); } 9%, 100% { background: var(--led-off); opacity: .6; box-shadow: none; } }
