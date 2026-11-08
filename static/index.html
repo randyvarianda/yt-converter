@@ -316,7 +316,7 @@ body {
 .ring::before {
   content: ""; position: absolute; border-radius: 50%;
   inset: calc(var(--size) / 2 - var(--r) - 2px);
-  border: 3px solid var(--led-off);
+  border: 3px solid transparent;
 }
 .dial.ready .ring::before { border-color: var(--led-on); box-shadow: 0 0 8px var(--led-glow), inset 0 0 6px var(--led-glow); }
 .dial.done .ring::before { border-color: var(--led-ok); box-shadow: 0 0 8px var(--led-ok-glow), inset 0 0 6px var(--led-ok-glow); }
