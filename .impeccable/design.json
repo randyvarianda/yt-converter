@@ -1,0 +1,723 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-08T15:23:33+00:00",
+  "title": "Design System: YouTube Converter",
+  "extensions": {
+    "colorMeta": {
+      "desk": {
+        "role": "neutral",
+        "displayName": "Desk Grey",
+        "canonical": "#c9ccd1",
+        "tonalRamp": [
+          "oklch(15.0% 0.005 260.7)",
+          "oklch(26.4% 0.005 260.7)",
+          "oklch(37.9% 0.006 260.7)",
+          "oklch(49.3% 0.007 260.7)",
+          "oklch(60.7% 0.008 260.7)",
+          "oklch(72.1% 0.007 260.7)",
+          "oklch(83.6% 0.006 260.7)",
+          "oklch(95.0% 0.005 260.7)"
+        ]
+      },
+      "desk-light": {
+        "role": "neutral",
+        "displayName": "Desk Light",
+        "canonical": "#dfe1e4",
+        "tonalRamp": [
+          "oklch(15.0% 0.003 258.3)",
+          "oklch(26.4% 0.003 258.3)",
+          "oklch(37.9% 0.004 258.3)",
+          "oklch(49.3% 0.004 258.3)",
+          "oklch(60.7% 0.005 258.3)",
+          "oklch(72.1% 0.004 258.3)",
+          "oklch(83.6% 0.004 258.3)",
+          "oklch(95.0% 0.003 258.3)"
+        ]
+      },
+      "plate-hi": {
+        "role": "neutral",
+        "displayName": "Plate Highlight",
+        "canonical": "#f3f4f5",
+        "tonalRamp": [
+          "oklch(15.0% 0.001 247.8)",
+          "oklch(26.4% 0.001 247.8)",
+          "oklch(37.9% 0.001 247.8)",
+          "oklch(49.3% 0.002 247.8)",
+          "oklch(60.7% 0.002 247.8)",
+          "oklch(72.1% 0.002 247.8)",
+          "oklch(83.6% 0.001 247.8)",
+          "oklch(95.0% 0.001 247.8)"
+        ]
+      },
+      "plate-lo": {
+        "role": "neutral",
+        "displayName": "Plate Low",
+        "canonical": "#d9dbde",
+        "tonalRamp": [
+          "oklch(15.0% 0.003 258.3)",
+          "oklch(26.4% 0.003 258.3)",
+          "oklch(37.9% 0.004 258.3)",
+          "oklch(49.3% 0.004 258.3)",
+          "oklch(60.7% 0.005 258.3)",
+          "oklch(72.1% 0.004 258.3)",
+          "oklch(83.6% 0.004 258.3)",
+          "oklch(95.0% 0.003 258.3)"
+        ]
+      },
+      "engrave": {
+        "role": "neutral",
+        "displayName": "Engraving",
+        "canonical": "#383b40",
+        "tonalRamp": [
+          "oklch(15.0% 0.006 260.7)",
+          "oklch(26.4% 0.007 260.7)",
+          "oklch(37.9% 0.008 260.7)",
+          "oklch(49.3% 0.009 260.7)",
+          "oklch(60.7% 0.01 260.7)",
+          "oklch(72.1% 0.009 260.7)",
+          "oklch(83.6% 0.008 260.7)",
+          "oklch(95.0% 0.007 260.7)"
+        ]
+      },
+      "engrave-soft": {
+        "role": "neutral",
+        "displayName": "Soft Engraving",
+        "canonical": "#555961",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 264.4)",
+          "oklch(26.4% 0.01 264.4)",
+          "oklch(37.9% 0.011 264.4)",
+          "oklch(49.3% 0.013 264.4)",
+          "oklch(60.7% 0.014 264.4)",
+          "oklch(72.1% 0.013 264.4)",
+          "oklch(83.6% 0.011 264.4)",
+          "oklch(95.0% 0.01 264.4)"
+        ]
+      },
+      "key-top": {
+        "role": "neutral",
+        "displayName": "Key White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15.0% 0.0 89.9)",
+          "oklch(26.4% 0.0 89.9)",
+          "oklch(37.9% 0.0 89.9)",
+          "oklch(49.3% 0.0 89.9)",
+          "oklch(60.7% 0.0 89.9)",
+          "oklch(72.1% 0.0 89.9)",
+          "oklch(83.6% 0.0 89.9)",
+          "oklch(95.0% 0.0 89.9)"
+        ]
+      },
+      "key-bot": {
+        "role": "neutral",
+        "displayName": "Key Shadowside",
+        "canonical": "#e4e5e8",
+        "tonalRamp": [
+          "oklch(15.0% 0.003 271.4)",
+          "oklch(26.4% 0.003 271.4)",
+          "oklch(37.9% 0.003 271.4)",
+          "oklch(49.3% 0.004 271.4)",
+          "oklch(60.7% 0.004 271.4)",
+          "oklch(72.1% 0.004 271.4)",
+          "oklch(83.6% 0.003 271.4)",
+          "oklch(95.0% 0.003 271.4)"
+        ]
+      },
+      "key-down-top": {
+        "role": "neutral",
+        "displayName": "Key Down Top",
+        "canonical": "#eceef0",
+        "tonalRamp": [
+          "oklch(15.0% 0.002 247.9)",
+          "oklch(26.4% 0.002 247.9)",
+          "oklch(37.9% 0.003 247.9)",
+          "oklch(49.3% 0.003 247.9)",
+          "oklch(60.7% 0.003 247.9)",
+          "oklch(72.1% 0.003 247.9)",
+          "oklch(83.6% 0.003 247.9)",
+          "oklch(95.0% 0.002 247.9)"
+        ]
+      },
+      "key-down-bot": {
+        "role": "neutral",
+        "displayName": "Key Down Bottom",
+        "canonical": "#dcdee1",
+        "tonalRamp": [
+          "oklch(15.0% 0.003 258.3)",
+          "oklch(26.4% 0.003 258.3)",
+          "oklch(37.9% 0.004 258.3)",
+          "oklch(49.3% 0.004 258.3)",
+          "oklch(60.7% 0.005 258.3)",
+          "oklch(72.1% 0.004 258.3)",
+          "oklch(83.6% 0.004 258.3)",
+          "oklch(95.0% 0.003 258.3)"
+        ]
+      },
+      "key-text": {
+        "role": "neutral",
+        "displayName": "Key Legend",
+        "canonical": "#1c1e21",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 258.4)",
+          "oklch(26.4% 0.005 258.4)",
+          "oklch(37.9% 0.005 258.4)",
+          "oklch(49.3% 0.006 258.4)",
+          "oklch(60.7% 0.007 258.4)",
+          "oklch(72.1% 0.006 258.4)",
+          "oklch(83.6% 0.005 258.4)",
+          "oklch(95.0% 0.005 258.4)"
+        ]
+      },
+      "led-off": {
+        "role": "neutral",
+        "displayName": "LED Off",
+        "canonical": "#9a9ea5",
+        "tonalRamp": [
+          "oklch(15.0% 0.007 261.8)",
+          "oklch(26.4% 0.008 261.8)",
+          "oklch(37.9% 0.009 261.8)",
+          "oklch(49.3% 0.01 261.8)",
+          "oklch(60.7% 0.011 261.8)",
+          "oklch(72.1% 0.01 261.8)",
+          "oklch(83.6% 0.009 261.8)",
+          "oklch(95.0% 0.008 261.8)"
+        ]
+      },
+      "led-on": {
+        "role": "primary",
+        "displayName": "Indicator Blue",
+        "canonical": "#2f86ff",
+        "tonalRamp": [
+          "oklch(15.0% 0.119 257.9)",
+          "oklch(26.4% 0.139 257.9)",
+          "oklch(37.9% 0.158 257.9)",
+          "oklch(49.3% 0.178 257.9)",
+          "oklch(60.7% 0.198 257.9)",
+          "oklch(72.1% 0.178 257.9)",
+          "oklch(83.6% 0.158 257.9)",
+          "oklch(95.0% 0.139 257.9)"
+        ]
+      },
+      "glass": {
+        "role": "neutral",
+        "displayName": "Black Glass",
+        "canonical": "#060b0d",
+        "tonalRamp": [
+          "oklch(15.0% 0.006 221.8)",
+          "oklch(26.4% 0.007 221.8)",
+          "oklch(37.9% 0.008 221.8)",
+          "oklch(49.3% 0.009 221.8)",
+          "oklch(60.7% 0.01 221.8)",
+          "oklch(72.1% 0.009 221.8)",
+          "oklch(83.6% 0.008 221.8)",
+          "oklch(95.0% 0.007 221.8)"
+        ]
+      },
+      "vfd": {
+        "role": "secondary",
+        "displayName": "Ice Phosphor",
+        "canonical": "#a6e6ff",
+        "tonalRamp": [
+          "oklch(15.0% 0.044 224.2)",
+          "oklch(26.4% 0.051 224.2)",
+          "oklch(37.9% 0.058 224.2)",
+          "oklch(49.3% 0.066 224.2)",
+          "oklch(60.7% 0.073 224.2)",
+          "oklch(72.1% 0.066 224.2)",
+          "oklch(83.6% 0.058 224.2)",
+          "oklch(95.0% 0.051 224.2)"
+        ]
+      },
+      "vfd-dim": {
+        "role": "secondary",
+        "displayName": "Dim Phosphor",
+        "canonical": "rgb(166 230 255 / .62)",
+        "tonalRamp": [
+          "oklch(15.0% 0.044 224.2)",
+          "oklch(26.4% 0.051 224.2)",
+          "oklch(37.9% 0.058 224.2)",
+          "oklch(49.3% 0.066 224.2)",
+          "oklch(60.7% 0.073 224.2)",
+          "oklch(72.1% 0.066 224.2)",
+          "oklch(83.6% 0.058 224.2)",
+          "oklch(95.0% 0.051 224.2)"
+        ],
+        "note": "62% alpha of vfd; ramp is the vfd hue."
+      },
+      "vfd-ghost": {
+        "role": "secondary",
+        "displayName": "Ghost Segment",
+        "canonical": "rgb(166 230 255 / .07)",
+        "tonalRamp": [
+          "oklch(15.0% 0.044 224.2)",
+          "oklch(26.4% 0.051 224.2)",
+          "oklch(37.9% 0.058 224.2)",
+          "oklch(49.3% 0.066 224.2)",
+          "oklch(60.7% 0.073 224.2)",
+          "oklch(72.1% 0.066 224.2)",
+          "oklch(83.6% 0.058 224.2)",
+          "oklch(95.0% 0.051 224.2)"
+        ],
+        "note": "7% alpha of vfd; unlit segments and meter cells."
+      },
+      "vfd-warn": {
+        "role": "tertiary",
+        "displayName": "Warning Amber",
+        "canonical": "#ffbb55",
+        "tonalRamp": [
+          "oklch(15.0% 0.084 74.6)",
+          "oklch(26.4% 0.098 74.6)",
+          "oklch(37.9% 0.112 74.6)",
+          "oklch(49.3% 0.126 74.6)",
+          "oklch(60.7% 0.141 74.6)",
+          "oklch(72.1% 0.126 74.6)",
+          "oklch(83.6% 0.112 74.6)",
+          "oklch(95.0% 0.098 74.6)"
+        ]
+      },
+      "desk-dark": {
+        "role": "neutral",
+        "displayName": "Desk Grey (dark)",
+        "canonical": "#0c0d0f",
+        "tonalRamp": [
+          "oklch(15.0% 0.003 264.4)",
+          "oklch(26.4% 0.003 264.4)",
+          "oklch(37.9% 0.004 264.4)",
+          "oklch(49.3% 0.004 264.4)",
+          "oklch(60.7% 0.005 264.4)",
+          "oklch(72.1% 0.004 264.4)",
+          "oklch(83.6% 0.004 264.4)",
+          "oklch(95.0% 0.003 264.4)"
+        ]
+      },
+      "desk-light-dark": {
+        "role": "neutral",
+        "displayName": "Desk Light (dark)",
+        "canonical": "#1a1c1f",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 258.4)",
+          "oklch(26.4% 0.005 258.4)",
+          "oklch(37.9% 0.005 258.4)",
+          "oklch(49.3% 0.006 258.4)",
+          "oklch(60.7% 0.007 258.4)",
+          "oklch(72.1% 0.006 258.4)",
+          "oklch(83.6% 0.005 258.4)",
+          "oklch(95.0% 0.005 258.4)"
+        ]
+      },
+      "plate-hi-dark": {
+        "role": "neutral",
+        "displayName": "Plate Highlight (dark)",
+        "canonical": "#34363a",
+        "tonalRamp": [
+          "oklch(15.0% 0.005 264.5)",
+          "oklch(26.4% 0.005 264.5)",
+          "oklch(37.9% 0.006 264.5)",
+          "oklch(49.3% 0.007 264.5)",
+          "oklch(60.7% 0.008 264.5)",
+          "oklch(72.1% 0.007 264.5)",
+          "oklch(83.6% 0.006 264.5)",
+          "oklch(95.0% 0.005 264.5)"
+        ]
+      },
+      "plate-lo-dark": {
+        "role": "neutral",
+        "displayName": "Plate Low (dark)",
+        "canonical": "#25272a",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 258.4)",
+          "oklch(26.4% 0.004 258.4)",
+          "oklch(37.9% 0.005 258.4)",
+          "oklch(49.3% 0.006 258.4)",
+          "oklch(60.7% 0.006 258.4)",
+          "oklch(72.1% 0.006 258.4)",
+          "oklch(83.6% 0.005 258.4)",
+          "oklch(95.0% 0.004 258.4)"
+        ]
+      },
+      "engrave-dark": {
+        "role": "neutral",
+        "displayName": "Engraving (dark)",
+        "canonical": "#c6c9ce",
+        "tonalRamp": [
+          "oklch(15.0% 0.005 260.7)",
+          "oklch(26.4% 0.005 260.7)",
+          "oklch(37.9% 0.006 260.7)",
+          "oklch(49.3% 0.007 260.7)",
+          "oklch(60.7% 0.008 260.7)",
+          "oklch(72.1% 0.007 260.7)",
+          "oklch(83.6% 0.006 260.7)",
+          "oklch(95.0% 0.005 260.7)"
+        ]
+      },
+      "engrave-soft-dark": {
+        "role": "neutral",
+        "displayName": "Soft Engraving (dark)",
+        "canonical": "#a2a6ad",
+        "tonalRamp": [
+          "oklch(15.0% 0.007 261.8)",
+          "oklch(26.4% 0.008 261.8)",
+          "oklch(37.9% 0.009 261.8)",
+          "oklch(49.3% 0.01 261.8)",
+          "oklch(60.7% 0.011 261.8)",
+          "oklch(72.1% 0.01 261.8)",
+          "oklch(83.6% 0.009 261.8)",
+          "oklch(95.0% 0.008 261.8)"
+        ]
+      },
+      "key-top-dark": {
+        "role": "neutral",
+        "displayName": "Key White (dark)",
+        "canonical": "#4a4c51",
+        "tonalRamp": [
+          "oklch(15.0% 0.005 268.4)",
+          "oklch(26.4% 0.006 268.4)",
+          "oklch(37.9% 0.007 268.4)",
+          "oklch(49.3% 0.008 268.4)",
+          "oklch(60.7% 0.009 268.4)",
+          "oklch(72.1% 0.008 268.4)",
+          "oklch(83.6% 0.007 268.4)",
+          "oklch(95.0% 0.006 268.4)"
+        ]
+      },
+      "key-bot-dark": {
+        "role": "neutral",
+        "displayName": "Key Shadowside (dark)",
+        "canonical": "#36383c",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 264.5)",
+          "oklch(26.4% 0.005 264.5)",
+          "oklch(37.9% 0.006 264.5)",
+          "oklch(49.3% 0.007 264.5)",
+          "oklch(60.7% 0.007 264.5)",
+          "oklch(72.1% 0.007 264.5)",
+          "oklch(83.6% 0.006 264.5)",
+          "oklch(95.0% 0.005 264.5)"
+        ]
+      },
+      "key-down-top-dark": {
+        "role": "neutral",
+        "displayName": "Key Down Top (dark)",
+        "canonical": "#3a3c40",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 264.5)",
+          "oklch(26.4% 0.005 264.5)",
+          "oklch(37.9% 0.006 264.5)",
+          "oklch(49.3% 0.007 264.5)",
+          "oklch(60.7% 0.007 264.5)",
+          "oklch(72.1% 0.007 264.5)",
+          "oklch(83.6% 0.006 264.5)",
+          "oklch(95.0% 0.005 264.5)"
+        ]
+      },
+      "key-down-bot-dark": {
+        "role": "neutral",
+        "displayName": "Key Down Bottom (dark)",
+        "canonical": "#2f3134",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 258.4)",
+          "oklch(26.4% 0.004 258.4)",
+          "oklch(37.9% 0.005 258.4)",
+          "oklch(49.3% 0.005 258.4)",
+          "oklch(60.7% 0.006 258.4)",
+          "oklch(72.1% 0.005 258.4)",
+          "oklch(83.6% 0.005 258.4)",
+          "oklch(95.0% 0.004 258.4)"
+        ]
+      },
+      "key-text-dark": {
+        "role": "neutral",
+        "displayName": "Key Legend (dark)",
+        "canonical": "#eef0f3",
+        "tonalRamp": [
+          "oklch(15.0% 0.003 258.3)",
+          "oklch(26.4% 0.003 258.3)",
+          "oklch(37.9% 0.004 258.3)",
+          "oklch(49.3% 0.004 258.3)",
+          "oklch(60.7% 0.005 258.3)",
+          "oklch(72.1% 0.004 258.3)",
+          "oklch(83.6% 0.004 258.3)",
+          "oklch(95.0% 0.003 258.3)"
+        ]
+      },
+      "led-off-dark": {
+        "role": "neutral",
+        "displayName": "LED Off (dark)",
+        "canonical": "#55585e",
+        "tonalRamp": [
+          "oklch(15.0% 0.006 264.5)",
+          "oklch(26.4% 0.007 264.5)",
+          "oklch(37.9% 0.008 264.5)",
+          "oklch(49.3% 0.009 264.5)",
+          "oklch(60.7% 0.01 264.5)",
+          "oklch(72.1% 0.009 264.5)",
+          "oklch(83.6% 0.008 264.5)",
+          "oklch(95.0% 0.007 264.5)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "numeral-lg": {
+        "displayName": "Numeral Large",
+        "purpose": "Duration readout in the display at rest; DSEG7 over a ghost 88:88 layer."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Percent and ETA during a run."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Video title in the glass, two-line clamp."
+      },
+      "input": {
+        "displayName": "Input",
+        "purpose": "The pasted link, phosphor with glow."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Base text; error messages, file names at 600."
+      },
+      "key": {
+        "displayName": "Key",
+        "purpose": "Legends on format and preset keys."
+      },
+      "key-transport": {
+        "displayName": "Key Transport",
+        "purpose": "Uppercase label on the Convert key."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Quality hint under the bank, footer note."
+      },
+      "legend": {
+        "displayName": "Legend",
+        "purpose": "Engraved uppercase group labels on metal (brand line at 12px, 0.2em)."
+      },
+      "vfd-label": {
+        "displayName": "VFD Label",
+        "purpose": "Uppercase labels and status inside the glass, eject text, file tags."
+      },
+      "fine": {
+        "displayName": "Fine",
+        "purpose": "Destination note, licence line, saved-file sub-line."
+      }
+    },
+    "shadows": [
+      {
+        "name": "plate",
+        "value": "inset 0 1px 0 var(--plate-shine), inset 0 -1px 0 rgb(0 0 0 / .12), 0 0 0 1px var(--plate-edge), 0 2px 3px rgb(0 0 0 / .18), 0 22px 40px -18px rgb(0 0 0 / .45)",
+        "purpose": "The faceplate on the desk."
+      },
+      {
+        "name": "key-rest",
+        "value": "inset 0 1px 0 var(--key-shine), inset 0 -2px 0 rgb(0 0 0 / .06), 0 0 0 1px var(--key-edge), 0 2px 0 rgb(0 0 0 / .22), 0 4px 6px -2px var(--key-drop)",
+        "purpose": "Every key at rest; the 2px unblurred step is the key's side wall, keys only."
+      },
+      {
+        "name": "key-latched",
+        "value": "inset 0 1px 2px rgb(0 0 0 / .14), 0 0 0 1px var(--key-edge), 0 1px 0 rgb(0 0 0 / .2)",
+        "purpose": "Latched or active key, paired with translateY(2px)."
+      },
+      {
+        "name": "window-bezel",
+        "value": "inset 0 1px 2px rgb(0 0 0 / .35)",
+        "purpose": "Bezel ring around the glass (on a dark-to-bezel-lo gradient)."
+      },
+      {
+        "name": "glass",
+        "value": "inset 0 0 0 1px var(--glass-edge), inset 0 8px 24px rgb(0 0 0 / .8)",
+        "purpose": "Recessed black glass field."
+      },
+      {
+        "name": "well",
+        "value": "inset 0 1px 3px rgb(0 0 0 / .28), 0 1px 0 var(--engrave-hi)",
+        "purpose": "Recessed tray behind a key group."
+      },
+      {
+        "name": "led-off",
+        "value": "inset 0 1px 1px rgb(0 0 0 / .45)",
+        "purpose": "Unlit LED pip."
+      },
+      {
+        "name": "led-on",
+        "value": "0 0 0 1px rgb(0 40 120 / .35), 0 0 8px 1px var(--led-glow)",
+        "purpose": "Lit LED; emitted light."
+      },
+      {
+        "name": "meter-lit",
+        "value": "0 0 6px rgb(166 230 255 / .55)",
+        "purpose": "Lit meter cell; emitted light."
+      },
+      {
+        "name": "phosphor-glow",
+        "value": "text-shadow: 0 0 4px rgb(166 230 255 / .35)",
+        "purpose": "Phosphor text in the glass."
+      },
+      {
+        "name": "warn-glow",
+        "value": "text-shadow: 0 0 6px rgb(255 187 85 / .4)",
+        "purpose": "Amber warning text in the glass."
+      },
+      {
+        "name": "engrave",
+        "value": "text-shadow: 0 1px 0 var(--engrave-hi)",
+        "purpose": "Engraved text on metal."
+      }
+    ],
+    "motion": [
+      {
+        "name": "key-travel",
+        "value": "90ms steps(2)",
+        "purpose": "Key transform and shadow on press/latch; a snap, not an ease."
+      },
+      {
+        "name": "led-blink",
+        "value": "1s steps(1) infinite",
+        "purpose": "Transport LED while busy."
+      },
+      {
+        "name": "meter-sweep",
+        "value": "1.3s steps(1) infinite, 40ms per-cell delay",
+        "purpose": "Indeterminate phases on the level meter."
+      },
+      {
+        "name": "loading-pulse",
+        "value": "1.2s ease-in-out infinite",
+        "purpose": "Thumbnail placeholder while looking up a video."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Removes key transitions and all three animations; meter shows a static 35% phosphor fill."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "760px",
+        "purpose": "Deck stacks; transport becomes a 64px bar with corner LED; wells go full width."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Key",
+      "kind": "button",
+      "refersTo": "key",
+      "description": "Latching piano key with LED pip; latched state is travel plus a lit LED.",
+      "html": "<div style=\"display:flex;gap:10px\"><button class=\"ds-key\" aria-pressed=\"true\"><span class=\"ds-led\"></span>MP3</button><button class=\"ds-key\" aria-pressed=\"false\"><span class=\"ds-led\"></span>MP4</button></div>",
+      "css": ":host{--plate-hi:#f3f4f5;--plate-lo:#d9dbde;--plate-edge:rgb(0 0 0/.38);--plate-shine:rgb(255 255 255/.9);--hairline:rgb(0 0 0/.022);--sheen:rgb(255 255 255/.45);--well:rgb(0 0 0/.10);--bezel-lo:rgb(255 255 255/.35);--engrave:#383b40;--engrave-soft:#555961;--engrave-hi:rgb(255 255 255/.85);--key-top:#fff;--key-bot:#e4e5e8;--key-down-top:#eceef0;--key-down-bot:#dcdee1;--key-text:#1c1e21;--key-edge:rgb(0 0 0/.32);--key-shine:#fff;--key-drop:rgb(30 34 40/.38);--led-off:#9a9ea5;--led-on:#2f86ff;--led-glow:rgb(47 134 255/.65);--glass:#060b0d;--glass-edge:#000;--vfd:#a6e6ff;--vfd-dim:rgb(166 230 255/.62);--vfd-ghost:rgb(166 230 255/.07);--vfd-warn:#ffbb55;--focus:#2f86ff;font-family:Lato,system-ui,sans-serif}.ds-key{position:relative;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:64px;height:56px;padding:0 14px;border:0;border-radius:6px;background:linear-gradient(180deg,var(--key-top),var(--key-bot));color:var(--key-text);font:700 13px/1 Lato,sans-serif;letter-spacing:.06em;box-shadow:inset 0 1px 0 var(--key-shine),inset 0 -2px 0 rgb(0 0 0/.06),0 0 0 1px var(--key-edge),0 2px 0 rgb(0 0 0/.22),0 4px 6px -2px var(--key-drop);transition:transform 90ms steps(2),box-shadow 90ms steps(2);cursor:pointer}.ds-key:hover{background:linear-gradient(180deg,var(--key-top),var(--key-top) 40%,var(--key-bot))}.ds-key:active,.ds-key[aria-pressed=true]{transform:translateY(2px);background:linear-gradient(180deg,var(--key-down-top),var(--key-down-bot));box-shadow:inset 0 1px 2px rgb(0 0 0/.14),0 0 0 1px var(--key-edge),0 1px 0 rgb(0 0 0/.2)}.ds-key:focus-visible{outline:2px solid var(--focus);outline-offset:3px}.ds-led{width:14px;height:4px;border-radius:2px;background:var(--led-off);box-shadow:inset 0 1px 1px rgb(0 0 0/.45)}.ds-key[aria-pressed=true] .ds-led{background:radial-gradient(circle at 40% 35%,#cfe3ff,var(--led-on) 55%);box-shadow:0 0 0 1px rgb(0 40 120/.35),0 0 8px 1px var(--led-glow)}"
+    },
+    {
+      "name": "Preset Key Well",
+      "kind": "chip",
+      "refersTo": "key-well",
+      "description": "Engraved legend over a recessed well of interlocking preset keys, one latched.",
+      "html": "<div class=\"ds-plate\"><div class=\"ds-group\"><span class=\"ds-legend\">MP3 · kbps</span><div class=\"ds-well\"><button class=\"ds-key\" aria-pressed=\"false\"><span class=\"ds-led\"></span>128</button><button class=\"ds-key\" aria-pressed=\"true\"><span class=\"ds-led\"></span>192</button><button class=\"ds-key\" aria-pressed=\"false\"><span class=\"ds-led\"></span>320</button></div></div></div>",
+      "css": ":host{--plate-hi:#f3f4f5;--plate-lo:#d9dbde;--plate-edge:rgb(0 0 0/.38);--plate-shine:rgb(255 255 255/.9);--hairline:rgb(0 0 0/.022);--sheen:rgb(255 255 255/.45);--well:rgb(0 0 0/.10);--bezel-lo:rgb(255 255 255/.35);--engrave:#383b40;--engrave-soft:#555961;--engrave-hi:rgb(255 255 255/.85);--key-top:#fff;--key-bot:#e4e5e8;--key-down-top:#eceef0;--key-down-bot:#dcdee1;--key-text:#1c1e21;--key-edge:rgb(0 0 0/.32);--key-shine:#fff;--key-drop:rgb(30 34 40/.38);--led-off:#9a9ea5;--led-on:#2f86ff;--led-glow:rgb(47 134 255/.65);--glass:#060b0d;--glass-edge:#000;--vfd:#a6e6ff;--vfd-dim:rgb(166 230 255/.62);--vfd-ghost:rgb(166 230 255/.07);--vfd-warn:#ffbb55;--focus:#2f86ff;font-family:Lato,system-ui,sans-serif}.ds-key{position:relative;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:64px;height:56px;padding:0 14px;border:0;border-radius:6px;background:linear-gradient(180deg,var(--key-top),var(--key-bot));color:var(--key-text);font:700 13px/1 Lato,sans-serif;letter-spacing:.06em;box-shadow:inset 0 1px 0 var(--key-shine),inset 0 -2px 0 rgb(0 0 0/.06),0 0 0 1px var(--key-edge),0 2px 0 rgb(0 0 0/.22),0 4px 6px -2px var(--key-drop);transition:transform 90ms steps(2),box-shadow 90ms steps(2);cursor:pointer}.ds-key:hover{background:linear-gradient(180deg,var(--key-top),var(--key-top) 40%,var(--key-bot))}.ds-key:active,.ds-key[aria-pressed=true]{transform:translateY(2px);background:linear-gradient(180deg,var(--key-down-top),var(--key-down-bot));box-shadow:inset 0 1px 2px rgb(0 0 0/.14),0 0 0 1px var(--key-edge),0 1px 0 rgb(0 0 0/.2)}.ds-key:focus-visible{outline:2px solid var(--focus);outline-offset:3px}.ds-led{width:14px;height:4px;border-radius:2px;background:var(--led-off);box-shadow:inset 0 1px 1px rgb(0 0 0/.45)}.ds-key[aria-pressed=true] .ds-led{background:radial-gradient(circle at 40% 35%,#cfe3ff,var(--led-on) 55%);box-shadow:0 0 0 1px rgb(0 40 120/.35),0 0 8px 1px var(--led-glow)}.ds-plate{padding:18px 22px;border-radius:14px;background:linear-gradient(175deg,transparent 30%,var(--sheen) 46%,transparent 62%),repeating-linear-gradient(0deg,var(--hairline) 0 1px,transparent 1px 2px,var(--hairline) 2px 3px,transparent 3px 5px),linear-gradient(180deg,var(--plate-hi),var(--plate-lo));box-shadow:inset 0 1px 0 var(--plate-shine),0 0 0 1px var(--plate-edge)}.ds-group{display:flex;flex-direction:column;gap:9px}.ds-legend{font:700 11px/1.4 Lato,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--engrave);text-shadow:0 1px 0 var(--engrave-hi)}.ds-well{display:flex;gap:6px;padding:5px;border-radius:9px;background:var(--well);box-shadow:inset 0 1px 3px rgb(0 0 0/.28),0 1px 0 var(--engrave-hi)}.ds-well .ds-key{height:52px}"
+    },
+    {
+      "name": "Transport Key",
+      "kind": "button",
+      "refersTo": "key-transport",
+      "description": "The single big Convert key; LED bar lit when ready, blinking when busy.",
+      "html": "<button class=\"ds-key ds-transport ready\"><span class=\"ds-led\"></span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"30\" height=\"30\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\"/></svg><span>Convert</span></button>",
+      "css": ":host{--plate-hi:#f3f4f5;--plate-lo:#d9dbde;--plate-edge:rgb(0 0 0/.38);--plate-shine:rgb(255 255 255/.9);--hairline:rgb(0 0 0/.022);--sheen:rgb(255 255 255/.45);--well:rgb(0 0 0/.10);--bezel-lo:rgb(255 255 255/.35);--engrave:#383b40;--engrave-soft:#555961;--engrave-hi:rgb(255 255 255/.85);--key-top:#fff;--key-bot:#e4e5e8;--key-down-top:#eceef0;--key-down-bot:#dcdee1;--key-text:#1c1e21;--key-edge:rgb(0 0 0/.32);--key-shine:#fff;--key-drop:rgb(30 34 40/.38);--led-off:#9a9ea5;--led-on:#2f86ff;--led-glow:rgb(47 134 255/.65);--glass:#060b0d;--glass-edge:#000;--vfd:#a6e6ff;--vfd-dim:rgb(166 230 255/.62);--vfd-ghost:rgb(166 230 255/.07);--vfd-warn:#ffbb55;--focus:#2f86ff;font-family:Lato,system-ui,sans-serif}.ds-key{position:relative;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:64px;height:56px;padding:0 14px;border:0;border-radius:6px;background:linear-gradient(180deg,var(--key-top),var(--key-bot));color:var(--key-text);font:700 13px/1 Lato,sans-serif;letter-spacing:.06em;box-shadow:inset 0 1px 0 var(--key-shine),inset 0 -2px 0 rgb(0 0 0/.06),0 0 0 1px var(--key-edge),0 2px 0 rgb(0 0 0/.22),0 4px 6px -2px var(--key-drop);transition:transform 90ms steps(2),box-shadow 90ms steps(2);cursor:pointer}.ds-key:hover{background:linear-gradient(180deg,var(--key-top),var(--key-top) 40%,var(--key-bot))}.ds-key:active,.ds-key[aria-pressed=true]{transform:translateY(2px);background:linear-gradient(180deg,var(--key-down-top),var(--key-down-bot));box-shadow:inset 0 1px 2px rgb(0 0 0/.14),0 0 0 1px var(--key-edge),0 1px 0 rgb(0 0 0/.2)}.ds-key:focus-visible{outline:2px solid var(--focus);outline-offset:3px}.ds-led{width:14px;height:4px;border-radius:2px;background:var(--led-off);box-shadow:inset 0 1px 1px rgb(0 0 0/.45)}.ds-key[aria-pressed=true] .ds-led{background:radial-gradient(circle at 40% 35%,#cfe3ff,var(--led-on) 55%);box-shadow:0 0 0 1px rgb(0 40 120/.35),0 0 8px 1px var(--led-glow)}.ds-transport{width:168px;min-height:150px;border-radius:10px;gap:12px;font-size:14px;letter-spacing:.16em;text-transform:uppercase}.ds-transport .ds-led{width:34px;height:5px;border-radius:3px}.ds-transport.ready .ds-led{background:radial-gradient(circle at 40% 35%,#cfe3ff,var(--led-on) 55%);box-shadow:0 0 0 1px rgb(0 40 120/.35),0 0 8px 1px var(--led-glow)}"
+    },
+    {
+      "name": "Display Window with Link Input",
+      "kind": "input",
+      "refersTo": "link-input",
+      "description": "Bezel-sunk black glass with the phosphor link field, status line and duration readout.",
+      "html": "<div class=\"ds-window\"><div class=\"ds-vfd\"><form class=\"ds-link\"><label class=\"ds-vl\">Link</label><input value=\"https://www.youtube.com/watch?v=aqz-KE-bpKQ\"><button type=\"button\" class=\"ds-clear\" aria-label=\"Clear\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 6 6 18\"/><path d=\"m6 6 12 12\"/></svg></button></form><div class=\"ds-vl ds-dim\">Ready</div><div class=\"ds-readout\"><span class=\"ds-seg\"><span class=\"ds-ghost\">88:88</span><span class=\"ds-val\">10:35</span></span><span class=\"ds-vl ds-glow\">MP3 192</span></div></div></div>",
+      "css": ":host{--plate-hi:#f3f4f5;--plate-lo:#d9dbde;--plate-edge:rgb(0 0 0/.38);--plate-shine:rgb(255 255 255/.9);--hairline:rgb(0 0 0/.022);--sheen:rgb(255 255 255/.45);--well:rgb(0 0 0/.10);--bezel-lo:rgb(255 255 255/.35);--engrave:#383b40;--engrave-soft:#555961;--engrave-hi:rgb(255 255 255/.85);--key-top:#fff;--key-bot:#e4e5e8;--key-down-top:#eceef0;--key-down-bot:#dcdee1;--key-text:#1c1e21;--key-edge:rgb(0 0 0/.32);--key-shine:#fff;--key-drop:rgb(30 34 40/.38);--led-off:#9a9ea5;--led-on:#2f86ff;--led-glow:rgb(47 134 255/.65);--glass:#060b0d;--glass-edge:#000;--vfd:#a6e6ff;--vfd-dim:rgb(166 230 255/.62);--vfd-ghost:rgb(166 230 255/.07);--vfd-warn:#ffbb55;--focus:#2f86ff;font-family:Lato,system-ui,sans-serif}.ds-window{width:460px;border-radius:9px;padding:4px;background:linear-gradient(180deg,rgb(0 0 0/.22),var(--bezel-lo));box-shadow:inset 0 1px 2px rgb(0 0 0/.35)}.ds-vfd{position:relative;border-radius:6px;padding:14px 16px 16px;background:radial-gradient(140% 90% at 30% 0%,rgb(166 230 255/.06),transparent 60%),var(--glass);box-shadow:inset 0 0 0 1px var(--glass-edge),inset 0 8px 24px rgb(0 0 0/.8);color:var(--vfd);display:flex;flex-direction:column;gap:12px;overflow:hidden}.ds-vfd::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(160deg,rgb(255 255 255/.07),transparent 38%)}.ds-link{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid rgb(166 230 255/.16);margin:0}.ds-link:focus-within{border-bottom-color:var(--vfd);box-shadow:0 1px 0 var(--vfd)}.ds-link input{flex:1;min-width:0;border:0;outline:0;background:none;color:var(--vfd);caret-color:var(--vfd);font:600 15px/1.3 Lato,sans-serif;text-shadow:0 0 4px rgb(166 230 255/.35)}.ds-vl{font:700 11px/1.4 Lato,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--vfd-dim)}.ds-glow{color:var(--vfd);text-shadow:0 0 4px rgb(166 230 255/.35)}.ds-clear{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;border:1px solid rgb(166 230 255/.3);background:none;color:var(--vfd);cursor:pointer}.ds-clear:hover{background:rgb(166 230 255/.1)}.ds-clear:focus-visible{outline:2px solid var(--focus);outline-offset:3px}.ds-readout{display:flex;align-items:baseline;justify-content:space-between;padding-top:10px;border-top:1px solid rgb(166 230 255/.12)}.ds-seg{position:relative;font:700 26px/1 'DSEG7 Classic',monospace;letter-spacing:.04em;text-shadow:0 0 4px rgb(166 230 255/.35)}.ds-ghost{position:absolute;inset:0;color:var(--vfd-ghost);text-shadow:none}.ds-val{position:relative}"
+    },
+    {
+      "name": "Level Meter",
+      "kind": "custom",
+      "refersTo": "display-window",
+      "description": "32-cell phosphor meter; lit cells emit, unlit cells are ghost segments.",
+      "html": "<div class=\"ds-glass\"><div class=\"ds-meter\"><i class=\"lit\"></i><i class=\"lit\"></i><i class=\"lit\"></i><i class=\"lit\"></i><i class=\"lit\"></i><i class=\"lit\"></i><i class=\"lit\"></i><i class=\"lit\"></i><i class=\"lit\"></i><i class=\"lit\"></i><i class=\"lit\"></i><i class=\"lit\"></i><i class=\"lit\"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>",
+      "css": ":host{--plate-hi:#f3f4f5;--plate-lo:#d9dbde;--plate-edge:rgb(0 0 0/.38);--plate-shine:rgb(255 255 255/.9);--hairline:rgb(0 0 0/.022);--sheen:rgb(255 255 255/.45);--well:rgb(0 0 0/.10);--bezel-lo:rgb(255 255 255/.35);--engrave:#383b40;--engrave-soft:#555961;--engrave-hi:rgb(255 255 255/.85);--key-top:#fff;--key-bot:#e4e5e8;--key-down-top:#eceef0;--key-down-bot:#dcdee1;--key-text:#1c1e21;--key-edge:rgb(0 0 0/.32);--key-shine:#fff;--key-drop:rgb(30 34 40/.38);--led-off:#9a9ea5;--led-on:#2f86ff;--led-glow:rgb(47 134 255/.65);--glass:#060b0d;--glass-edge:#000;--vfd:#a6e6ff;--vfd-dim:rgb(166 230 255/.62);--vfd-ghost:rgb(166 230 255/.07);--vfd-warn:#ffbb55;--focus:#2f86ff;font-family:Lato,system-ui,sans-serif}.ds-glass{width:420px;padding:16px;border-radius:6px;background:var(--glass)}.ds-meter{display:grid;grid-template-columns:repeat(32,1fr);gap:3px;height:12px}.ds-meter i{display:block;border-radius:1px;background:var(--vfd-ghost)}.ds-meter i.lit{background:var(--vfd);box-shadow:0 0 6px rgb(166 230 255/.55)}"
+    },
+    {
+      "name": "Saved File Row with Eject Key",
+      "kind": "custom",
+      "refersTo": "eject-key",
+      "description": "Outlined format tag, file name and an eject key that reveals the file in Finder.",
+      "html": "<div class=\"ds-glass\"><div class=\"ds-file\"><span class=\"ds-tag\">MP3</span><div class=\"ds-meta\"><div class=\"ds-name\">Big Buck Bunny 60fps 4K.mp3</div><div class=\"ds-sub\">Saved · MP3 · 9.8 MB</div></div><button class=\"ds-eject\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 4 4.5 14h15z\"/><path d=\"M5 19h14\"/></svg>Show in Finder</button></div></div>",
+      "css": ":host{--plate-hi:#f3f4f5;--plate-lo:#d9dbde;--plate-edge:rgb(0 0 0/.38);--plate-shine:rgb(255 255 255/.9);--hairline:rgb(0 0 0/.022);--sheen:rgb(255 255 255/.45);--well:rgb(0 0 0/.10);--bezel-lo:rgb(255 255 255/.35);--engrave:#383b40;--engrave-soft:#555961;--engrave-hi:rgb(255 255 255/.85);--key-top:#fff;--key-bot:#e4e5e8;--key-down-top:#eceef0;--key-down-bot:#dcdee1;--key-text:#1c1e21;--key-edge:rgb(0 0 0/.32);--key-shine:#fff;--key-drop:rgb(30 34 40/.38);--led-off:#9a9ea5;--led-on:#2f86ff;--led-glow:rgb(47 134 255/.65);--glass:#060b0d;--glass-edge:#000;--vfd:#a6e6ff;--vfd-dim:rgb(166 230 255/.62);--vfd-ghost:rgb(166 230 255/.07);--vfd-warn:#ffbb55;--focus:#2f86ff;font-family:Lato,system-ui,sans-serif}.ds-glass{width:460px;padding:16px;border-radius:6px;background:var(--glass);color:var(--vfd);text-shadow:0 0 4px rgb(166 230 255/.35)}.ds-file{display:flex;align-items:center;gap:12px;padding-top:8px;border-top:1px solid rgb(166 230 255/.14)}.ds-tag{font:700 11px/1 Lato,sans-serif;letter-spacing:.12em;padding:4px 6px;border-radius:3px;border:1px solid currentColor}.ds-meta{flex:1;min-width:0}.ds-name{font:600 14px/1.4 Lato,sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ds-sub{font-size:11px;color:var(--vfd-dim);letter-spacing:.04em}.ds-eject{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;border-radius:5px;border:1px solid rgb(166 230 255/.35);background:rgb(166 230 255/.06);color:var(--vfd);font:700 11px/1 Lato,sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}.ds-eject:hover{background:rgb(166 230 255/.14)}.ds-eject:focus-visible{outline:2px solid var(--focus);outline-offset:3px}"
+    },
+    {
+      "name": "Faceplate Header",
+      "kind": "nav",
+      "refersTo": "faceplate",
+      "description": "Brushed plate with power LED, engraved brand legend and model line.",
+      "html": "<div class=\"ds-plate\"><header class=\"ds-top\"><span class=\"ds-pwr\"></span><span class=\"ds-brand\">YouTube Converter</span><span class=\"ds-model\">MP3 · MP4 · Local</span></header></div>",
+      "css": ":host{--plate-hi:#f3f4f5;--plate-lo:#d9dbde;--plate-edge:rgb(0 0 0/.38);--plate-shine:rgb(255 255 255/.9);--hairline:rgb(0 0 0/.022);--sheen:rgb(255 255 255/.45);--well:rgb(0 0 0/.10);--bezel-lo:rgb(255 255 255/.35);--engrave:#383b40;--engrave-soft:#555961;--engrave-hi:rgb(255 255 255/.85);--key-top:#fff;--key-bot:#e4e5e8;--key-down-top:#eceef0;--key-down-bot:#dcdee1;--key-text:#1c1e21;--key-edge:rgb(0 0 0/.32);--key-shine:#fff;--key-drop:rgb(30 34 40/.38);--led-off:#9a9ea5;--led-on:#2f86ff;--led-glow:rgb(47 134 255/.65);--glass:#060b0d;--glass-edge:#000;--vfd:#a6e6ff;--vfd-dim:rgb(166 230 255/.62);--vfd-ghost:rgb(166 230 255/.07);--vfd-warn:#ffbb55;--focus:#2f86ff;font-family:Lato,system-ui,sans-serif}.ds-plate{width:520px;padding:18px 22px 22px;border-radius:14px;background:linear-gradient(175deg,transparent 30%,var(--sheen) 46%,transparent 62%),repeating-linear-gradient(0deg,var(--hairline) 0 1px,transparent 1px 2px,var(--hairline) 2px 3px,transparent 3px 5px),linear-gradient(180deg,var(--plate-hi),var(--plate-lo));box-shadow:inset 0 1px 0 var(--plate-shine),inset 0 -1px 0 rgb(0 0 0/.12),0 0 0 1px var(--plate-edge),0 2px 3px rgb(0 0 0/.18),0 22px 40px -18px rgb(0 0 0/.45)}.ds-top{display:flex;align-items:center;gap:12px;font:700 11px/1.4 Lato,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--engrave);text-shadow:0 1px 0 var(--engrave-hi)}.ds-brand{font-size:12px;letter-spacing:.2em}.ds-model{margin-left:auto;font-weight:600;color:var(--engrave-soft)}.ds-pwr{width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#cfe3ff,var(--led-on) 55%);box-shadow:0 0 0 1px rgb(0 40 120/.35),0 0 8px 1px var(--led-glow)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Component on the Rack",
+    "overview": "The converter is a single piece of hi-fi equipment, not a web form. One rack-proportioned faceplate sits centred on a soft desk surface: brushed silver in light appearance, graphite in dark. A recessed black-glass vacuum-fluorescent window glows ice blue and carries everything that changes (the link, the video, the duration and output readout, the level meter, the saved files, errors). Below and beside it are physical keys that latch down with a blue LED pip, grouped into recessed wells, labelled with engraved small-caps legends. Numbers that count are seven-segment numerals with ghost segments showing through the glass.\n\nThe style is minimal skeuomorphism: crisp, high-contrast, physically legible, with every raised object edged by a dark 1px ring and a hard 1px top highlight. It is dense and quick, because it serves short bursts of use: paste, latch, press, reveal. Ornament never costs a step. Light in this world is literal: the VFD text, the meter segments and the LEDs emit a glow because they are emitters; nothing else does.\n\nConfirmed rejections from the user: mushy, low-contrast neumorphism (same-colour soft dual shadows, edges that dissolve into the surface), and anything that makes the task slower than a plain form.",
+    "keyCharacteristics": [
+      "One faceplate, one glass window, one key bank; no cards, no page chrome.",
+      "Two materials (anodised plate, black glass) and two emitters (ice-blue VFD, blue LED); amber only for warnings in the glass.",
+      "Keys latch: travel down 2px, darken, go inset, light their LED.",
+      "Engraved 11px uppercase legends on metal; seven-segment numerals behind glass.",
+      "Light and dark swap the plate and keys only; glass, VFD and LEDs are identical in both.",
+      "Bundled Lato, DSEG7 Classic and Lucide-style stroke icons; no external runtime."
+    ],
+    "rules": [
+      {
+        "name": "The Two Emitters Rule",
+        "body": "Only Ice Phosphor (in the glass) and Indicator Blue (on keys and LEDs) are lit colours; Warning Amber replaces Ice Phosphor only to signal a fault. The metal itself is never tinted.",
+        "section": "colors"
+      },
+      {
+        "name": "The Same Glass Rule",
+        "body": "The glass, phosphor, LED and amber values do not change with colour scheme. Dark mode swaps the desk, plate, engraving and keys only, the way a graphite unit still has the same display.",
+        "section": "colors"
+      },
+      {
+        "name": "The Engraving Rule",
+        "body": "Text on metal is never coloured; it is Engraving or Soft Engraving with a 1px highlight cast directly below (`text-shadow: 0 1px 0 var(--engrave-hi)`, white in light, black in dark), so it reads as cut into the plate.",
+        "section": "typography"
+      },
+      {
+        "name": "The Measured Numbers Rule",
+        "body": "Durations, percentages and times that the device measures are DSEG7 numerals over a ghost layer of all-segments-lit digits (`88:88`, `888`) in Ghost Segment. Blank digit positions use DSEG's blank glyph (`!`), never a space. Prose numbers (kbps, 1080p, file sizes) stay in Lato.",
+        "section": "typography"
+      },
+      {
+        "name": "The Emitted Light Rule",
+        "body": "Blurred glow appears only on things that emit light: phosphor text (`0 0 4px` at 35%), lit meter segments (`0 0 6px` at 55%), amber warnings (`0 0 6px` at 35–40%) and lit LEDs (`0 0 8px 1px`). Plate, keys and legends never glow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Crisp Edge Rule",
+        "body": "Every raised or sunk object has a hard 1px edge (dark ring or highlight line). Never build depth from two soft, same-coloured shadows on a same-coloured surface; that is the neumorphism the user rejected.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** put every changing value (video, readouts, progress, results, errors) inside the black glass in Ice Phosphor; keep the metal for fixed legends, keys and short engraved notes.",
+      "**Do** show latched state with travel (2px down), the Key Down gradient, an inset shadow and a lit Indicator Blue LED, driven by `aria-pressed` / `aria-checked`.",
+      "**Do** give every raised or sunk object a hard 1px edge and a 1px top highlight, per the Crisp Edge Rule.",
+      "**Do** set measured numbers in DSEG7 over a Ghost Segment layer, with `!` for blank digits.",
+      "**Do** engrave text on metal: 11px 700 uppercase at 0.14em with a 1px highlight beneath.",
+      "**Do** use `steps()` timing for key travel, LED blink and meter sweep, and drop all of it under `prefers-reduced-motion`.",
+      "**Do** keep glass, phosphor and LED values identical across light and dark; swap only desk, plate, engraving and keys."
+    ],
+    "donts": [
+      "**Don't** use soft, same-colour dual shadows or low-contrast raised surfaces; the user rejected mushy neumorphism.",
+      "**Don't** add steps, confirmations or ornament that slow the paste, latch, convert, reveal flow; the user rejected anything slower to use.",
+      "**Don't** put glow on non-emitters (plate, keys, legends, footer); glow is reserved for phosphor, meter cells, amber warnings and LEDs.",
+      "**Don't** introduce a third lit colour or tint the plate; amber stays inside the glass and only for faults.",
+      "**Don't** mark a selected key with a coloured fill or a check icon; the latch and LED are the state.",
+      "**Don't** imitate YouTube's red or logo anywhere on the unit.",
+      "**Don't** load fonts or icons from a CDN; Lato, DSEG7 and the icon set ship with the page."
+    ]
+  }
+}

@@ -5,329 +5,446 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>YouTube Converter</title>
 <style>
-/* Colour, spacing and type tokens. Lato (SIL OFL) and Lucide icons (ISC) are bundled. */
 @font-face { font-family: Lato; src: url(fonts/Lato-Regular.ttf); font-weight: 400; }
 @font-face { font-family: Lato; src: url(fonts/Lato-SemiBold.ttf); font-weight: 600; }
 @font-face { font-family: Lato; src: url(fonts/Lato-Bold.ttf); font-weight: 700; }
+@font-face { font-family: Seg; src: url(fonts/DSEG7Classic-Bold.woff2) format("woff2"); font-weight: 700; }
 
 :root {
-  --text-1: #000;
-  --text-2: rgb(0 0 0 / .65);
-  --text-3: rgb(0 0 0 / .48);
-  --text-primary: #2264d4;
-  --text-positive: #0c8a5c;
-  --text-negative: #c93030;
-  --text-placeholder: rgb(0 0 0 / .34);
-  --shape-primary: #3278f0;
-  --shape-on-primary: #fff;
-  --shape-neutral-2: rgb(0 0 0 / .16);
-  --shape-neutral-3: rgb(0 0 0 / .10);
-  --shape-neutral-4: rgb(0 0 0 / .04);
-  --shape-negative: #e84444;
-  --shape-negative-4: rgb(232 68 68 / .08);
-  --shape-primary-4: rgb(50 120 240 / .10);
-  --shape-positive-4: rgb(28 184 126 / .11);
-  --page: #f5f5f5;          /* UI/Page/Grouped 1 */
-  --card: #fff;             /* UI/Page/Grouped 2 */
-  --space-s: 4px;           /* Spacing/Small */
-  --space-2xl: 12px;        /* Spacing/2X Large */
-  --radius-xl: 10px;        /* Content/XLarge */
   color-scheme: light;
+  --desk: #c9ccd1;
+  --desk-light: #dfe1e4;
+  --plate-hi: #f3f4f5;
+  --plate-lo: #d9dbde;
+  --plate-edge: rgb(0 0 0 / .38);
+  --plate-shine: rgb(255 255 255 / .9);
+  --hairline: rgb(0 0 0 / .022);
+  --well: rgb(0 0 0 / .10);
+  --bezel-lo: rgb(255 255 255 / .35);
+  --sheen: rgb(255 255 255 / .45);
+  --engrave: #383b40;
+  --engrave-soft: #555961;
+  --engrave-hi: rgb(255 255 255 / .85);
+  --key-top: #ffffff;
+  --key-bot: #e4e5e8;
+  --key-down-top: #eceef0;
+  --key-down-bot: #dcdee1;
+  --key-text: #1c1e21;
+  --key-edge: rgb(0 0 0 / .32);
+  --key-shine: rgb(255 255 255 / 1);
+  --key-drop: rgb(30 34 40 / .38);
+  --led-off: #9a9ea5;
+  --led-on: #2f86ff;
+  --led-glow: rgb(47 134 255 / .65);
+  --glass: #060b0d;
+  --glass-edge: #000;
+  --vfd: #a6e6ff;
+  --vfd-dim: rgb(166 230 255 / .62);
+  --vfd-ghost: rgb(166 230 255 / .07);
+  --vfd-warn: #ffbb55;
+  --focus: #2f86ff;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-1: #f6f6f6;
-    --text-2: rgb(255 255 255 / .88);
-    --text-3: rgb(255 255 255 / .6);
-    --text-primary: #7aabff;
-    --text-positive: #1dd58d;
-    --text-negative: #ff7a85;
-    --text-placeholder: rgb(255 255 255 / .4);
-    --shape-neutral-2: rgb(255 255 255 / .26);
-    --shape-neutral-3: rgb(255 255 255 / .14);
-    --shape-neutral-4: rgb(255 255 255 / .08);
-    --shape-negative-4: rgb(232 68 68 / .17);
-    --shape-primary-4: rgb(50 120 240 / .20);
-    --shape-positive-4: rgb(28 184 126 / .16);
-    --page: #111111;
-    --card: #1c1c1c;
     color-scheme: dark;
+    --desk: #0c0d0f;
+    --desk-light: #1a1c1f;
+    --plate-hi: #34363a;
+    --plate-lo: #25272a;
+    --plate-edge: rgb(0 0 0 / .8);
+    --plate-shine: rgb(255 255 255 / .14);
+    --hairline: rgb(255 255 255 / .018);
+    --well: rgb(0 0 0 / .32);
+    --bezel-lo: rgb(255 255 255 / .06);
+    --sheen: rgb(255 255 255 / .035);
+    --engrave: #c6c9ce;
+    --engrave-soft: #a2a6ad;
+    --engrave-hi: rgb(0 0 0 / .7);
+    --key-top: #4a4c51;
+    --key-bot: #36383c;
+    --key-down-top: #3a3c40;
+    --key-down-bot: #2f3134;
+    --key-text: #eef0f3;
+    --key-edge: rgb(0 0 0 / .75);
+    --key-shine: rgb(255 255 255 / .16);
+    --key-drop: rgb(0 0 0 / .7);
+    --led-off: #55585e;
   }
 }
 
 * { box-sizing: border-box; }
+html { background: var(--desk); }
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--page);
-  color: var(--text-1);
-  font: 400 13px/1.35 Lato, system-ui, sans-serif;
+  background: radial-gradient(120% 80% at 50% 0%, var(--desk-light), var(--desk) 70%);
+  color: var(--engrave);
+  font: 400 14px/1.4 Lato, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  display: flex;
-  justify-content: center;
-  padding: 48px 16px;
+  display: grid;
+  place-items: center;
+  padding: 40px 16px;
 }
+::selection { background: var(--led-on); color: #fff; }
 .icon {
-  display: inline-block;
-  flex: none;
-  width: var(--icon, 16px);
-  height: var(--icon, 16px);
+  display: inline-block; flex: none;
+  width: var(--icon, 16px); height: var(--icon, 16px);
   background: currentColor;
   -webkit-mask: var(--src) center / contain no-repeat;
   mask: var(--src) center / contain no-repeat;
 }
 .i-download { --src: url(icons/download.svg); }
-.i-link     { --src: url(icons/link.svg); }
-.i-alert    { --src: url(icons/alert.svg); }
-.i-check    { --src: url(icons/check.svg); }
-.i-refresh  { --src: url(icons/refresh.svg); }
 .i-x        { --src: url(icons/x.svg); }
+.i-eject    { --src: url(icons/eject.svg); }
+.i-alert    { --src: url(icons/alert.svg); }
 
-main {
-  width: 100%;
-  max-width: 560px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+.rack { width: 100%; max-width: 920px; }
+
+/* ---------- Faceplate ---------- */
+.unit {
+  position: relative;
+  border-radius: 14px;
+  padding: 18px 22px 22px;
+  background:
+    linear-gradient(175deg, transparent 30%, var(--sheen) 46%, transparent 62%),
+    repeating-linear-gradient(0deg, var(--hairline) 0 1px, transparent 1px 2px, var(--hairline) 2px 3px, transparent 3px 5px),
+    linear-gradient(180deg, var(--plate-hi), var(--plate-lo));
+  box-shadow:
+    inset 0 1px 0 var(--plate-shine),
+    inset 0 -1px 0 rgb(0 0 0 / .12),
+    0 0 0 1px var(--plate-edge),
+    0 2px 3px rgb(0 0 0 / .18),
+    0 22px 40px -18px rgb(0 0 0 / .45);
 }
-header h1 { margin: 0 0 var(--space-s); font: 600 16px/1.35 Lato, sans-serif; } /* App/Headline-Semibold */
-header p  { margin: 0; color: var(--text-3); font-size: 12px; }                   /* App/P3-Regular */
-
-.card {
-  background: var(--card);
-  border-radius: var(--radius-xl);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.legend, .top {
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--engrave);
+  text-shadow: 0 1px 0 var(--engrave-hi);
+}
+.top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.top .brand { font-size: 12px; letter-spacing: .2em; }
+.top .model { color: var(--engrave-soft); font-weight: 600; margin-left: auto; }
+.led {
+  width: 8px; height: 8px; border-radius: 50%; flex: none;
+  background: var(--led-off);
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / .45), 0 1px 0 var(--engrave-hi);
+}
+.led.on, [aria-pressed="true"] > .led, [aria-checked="true"] > .led {
+  background: radial-gradient(circle at 40% 35%, #cfe3ff, var(--led-on) 55%);
+  box-shadow: 0 0 0 1px rgb(0 40 120 / .35), 0 0 8px 1px var(--led-glow);
 }
 
-/* Text field */
-.field { display: flex; flex-direction: column; gap: 6px; }
-.field label { font: 600 12px/1.35 Lato, sans-serif; }
-.field-box {
-  height: 28px;
-  padding: 0 8px;
-  gap: 8px;
-  display: flex;
-  align-items: center;
+.deck { display: grid; grid-template-columns: minmax(0, 1fr) 168px; gap: 18px; }
+.window { min-width: 0; }
+
+/* ---------- Display window ---------- */
+.window {
+  border-radius: 9px;
+  padding: 4px;
+  background: linear-gradient(180deg, rgb(0 0 0 / .22), var(--bezel-lo));
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / .35);
+}
+.vfd {
+  position: relative;
+  min-height: 236px;
   border-radius: 6px;
-  background: var(--shape-neutral-4);
-  box-shadow: inset 0 0 0 1px transparent;
-  color: var(--text-3);
+  padding: 14px 16px 16px;
+  background:
+    radial-gradient(140% 90% at 30% 0%, rgb(166 230 255 / .06), transparent 60%),
+    var(--glass);
+  box-shadow: inset 0 0 0 1px var(--glass-edge), inset 0 8px 24px rgb(0 0 0 / .8);
+  color: var(--vfd);
+  overflow: hidden;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.field-box:hover { box-shadow: inset 0 0 0 1px var(--shape-neutral-2); }
-.field-box:focus-within { box-shadow: inset 0 0 0 1px var(--shape-primary); }
-.field.error .field-box { box-shadow: inset 0 0 0 1px var(--shape-negative); }
-.field input {
-  flex: 1;
-  min-width: 0;
-  border: 0;
-  outline: 0;
-  background: none;
-  color: var(--text-1);
-  font: 400 13px/1.35 Lato, sans-serif;
-  caret-color: var(--shape-primary);
+.vfd::after { /* glass reflection */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(160deg, rgb(255 255 255 / .07), transparent 38%);
 }
-.field input::placeholder { color: var(--text-placeholder); }
-.field .err-icon { display: none; color: var(--text-negative); }
-.field.error .err-icon { display: inline-block; }
-.field .footer { min-height: 15px; font-size: 11px; color: var(--text-3); }
-.field.error .footer { color: var(--text-negative); }
+.glow { text-shadow: 0 0 4px rgb(166 230 255 / .35); }
+.vfd-small { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--vfd-dim); font-weight: 700; }
+
+.link-row {
+  display: flex; align-items: center; gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(166 230 255 / .16);
+}
+.link-row label { flex: none; }
+.link-row input {
+  flex: 1; min-width: 0;
+  border: 0; outline: 0; background: none;
+  color: var(--vfd);
+  font: 600 15px/1.3 Lato, sans-serif;
+  caret-color: var(--vfd);
+  text-shadow: 0 0 4px rgb(166 230 255 / .35);
+}
+.link-row input::placeholder { color: var(--vfd-dim); text-shadow: none; opacity: 1; }
+.link-row input:disabled { opacity: .7; }
 .clear {
-  display: none;
-  border: 0; padding: 0; background: none; cursor: pointer;
-  color: var(--text-3);
+  display: none; flex: none;
+  width: 28px; height: 28px; border-radius: 6px;
+  border: 1px solid rgb(166 230 255 / .3);
+  background: none; color: var(--vfd); cursor: pointer;
+  align-items: center; justify-content: center;
+  --icon: 14px;
 }
-.field-box:focus-within .clear.show, .field.error .clear.show { display: inline-flex; }
+.clear.show { display: inline-flex; }
+.clear:hover { background: rgb(166 230 255 / .1); }
 
-/* Video preview */
-.preview { display: flex; gap: var(--space-2xl); align-items: flex-start; }
-.preview[hidden] { display: none; }
+.status { min-height: 16px; }
+.status.warn { color: var(--vfd-warn); text-shadow: 0 0 6px rgb(255 187 85 / .4); }
+
+.video { display: flex; gap: 14px; align-items: flex-start; }
+.video[hidden] { display: none; }
 .thumb {
-  width: 128px; aspect-ratio: 16 / 9; flex: none;
-  border-radius: 8px; object-fit: cover;
-  background: var(--shape-neutral-4);
+  width: 132px; aspect-ratio: 16 / 9; flex: none; object-fit: cover;
+  border-radius: 3px;
+  background: rgb(166 230 255 / .06);
+  filter: saturate(.85) brightness(.92);
+  box-shadow: 0 0 0 1px rgb(166 230 255 / .18);
 }
-.meta { min-width: 0; display: flex; flex-direction: column; gap: var(--space-s); }
-.meta .title { font: 600 14px/1.35 Lato, sans-serif; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.meta .sub { font-size: 12px; color: var(--text-3); }
-.meta .lic { font-size: 11px; color: var(--text-3); }
-.skeleton .thumb, .skeleton .title, .skeleton .sub { color: transparent; background: var(--shape-neutral-4); border-radius: 4px; }
-.skeleton .title { width: 260px; }
-.skeleton .sub { width: 140px; }
+.video .meta { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.video .title { font: 700 16px/1.3 Lato, sans-serif; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-wrap: balance; }
+.video .sub { font-size: 13px; color: var(--vfd-dim); }
+.video .lic { font-size: 11px; color: var(--vfd-dim); }
+.video.loading .title, .video.loading .sub { color: transparent; text-shadow: none; background: rgb(166 230 255 / .08); border-radius: 3px; }
+.video.loading .title { width: 70%; height: 20px; }
+.video.loading .sub { width: 40%; height: 14px; }
+.video.loading .thumb { animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .5; } }
 
-/* Pills */
-.group { display: flex; flex-direction: column; gap: 6px; }
-.group > span { font: 600 12px/1.35 Lato, sans-serif; }
-.pills { display: flex; flex-wrap: wrap; gap: 8px; }
-.pill {
-  height: 32px;
-  padding: 0 14px;
-  display: inline-flex; align-items: center; gap: 6px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--shape-neutral-4);
-  box-shadow: inset 0 0 0 1px transparent;
-  color: var(--text-1);
-  font: 600 14px/1.35 Lato, sans-serif;
-  cursor: pointer;
-}
-.pill:hover { box-shadow: inset 0 0 0 1px var(--shape-neutral-2); }
-.pill:is([aria-pressed="true"], [aria-checked="true"]) {
-  background: var(--shape-primary-4);
-  box-shadow: inset 0 0 0 1px var(--shape-primary);
-  color: var(--text-primary);
-}
-.pill .icon { display: none; }
-.pill[aria-pressed="true"] .icon { display: inline-block; }
-.pill:disabled { opacity: .4; cursor: default; }
-.hint { font-size: 11px; color: var(--text-3); min-height: 15px; }
-.quality[hidden] { display: none; }
+.readout { margin-top: auto; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-top: 10px; border-top: 1px solid rgb(166 230 255 / .12); }
+.readout[hidden] { display: none; }
+.readout .seg { font-size: 26px; }
 
-/* Buttons */
-.actions { display: flex; gap: var(--space-2xl); flex-wrap: wrap; }
-.btn {
-  height: 40px;
-  padding: 0 12px;      /* padX 10 + 2px spacer */
-  border-radius: 8px;
-  border: 0;
-  display: inline-flex; align-items: center; justify-content: center; gap: 4px;
-  font: 600 16px/1.35 Lato, sans-serif;
-  cursor: pointer;
-  --icon: 20px;
-  text-decoration: none;
-}
-.btn .icon { -webkit-mask-size: 16.67px; mask-size: 16.67px; }
-.btn-primary { background: var(--shape-primary); color: var(--shape-on-primary); }
-.btn-secondary { background: var(--shape-neutral-4); color: var(--text-1); }
-.btn-ghost { background: none; color: var(--text-primary); }
-.btn:disabled { opacity: .4; cursor: default; }
-.btn-block { width: 100%; }
+/* level meter + readouts */
+.run { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
+.run[hidden] { display: none; }
+.run-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.readouts { display: flex; align-items: baseline; gap: 16px; }
+.seg { position: relative; font: 700 22px/1 Seg, monospace; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.seg .ghost { position: absolute; inset: 0; color: var(--vfd-ghost); text-shadow: none; }
+.seg .val { position: relative; }
+.seg-unit { font-size: 10px; letter-spacing: .14em; color: var(--vfd-dim); font-weight: 700; margin-left: 4px; }
+.meter { display: grid; grid-template-columns: repeat(32, 1fr); gap: 3px; height: 12px; }
+.meter i { display: block; border-radius: 1px; background: var(--vfd-ghost); }
+.meter i.lit { background: var(--vfd); box-shadow: 0 0 6px rgb(166 230 255 / .55); }
+.meter.sweep i { animation: sweep 1.3s steps(1) infinite; animation-delay: calc(var(--n) * 40ms); }
+@keyframes sweep { 0%, 12% { background: var(--vfd); box-shadow: 0 0 6px rgb(166 230 255 / .55); } 13%, 100% { background: var(--vfd-ghost); box-shadow: none; } }
 
-/* Visible keyboard focus (WCAG 2.4.7) */
-:is(.btn, .pill, .clear):focus-visible { outline: 2px solid var(--shape-primary); outline-offset: 2px; }
-
-/* Progress */
-.progress { display: flex; flex-direction: column; gap: 8px; }
-.progress[hidden] { display: none; }
-.progress-row { display: flex; justify-content: space-between; gap: var(--space-2xl); font-size: 12px; }
-.progress-row .stats { color: var(--text-3); font-variant-numeric: tabular-nums; }
-.bar { height: 6px; border-radius: 3px; background: var(--shape-neutral-3); overflow: hidden; }
-.bar > div { height: 100%; width: 0; background: var(--shape-primary); border-radius: inherit; transition: width .3s ease-out; }
-.bar.indeterminate > div { width: 30%; animation: slide 1.1s ease-in-out infinite; }
-@keyframes slide { from { transform: translateX(-100%); } to { transform: translateX(340%); } }
-@media (prefers-reduced-motion: reduce) { .bar.indeterminate > div { animation: none; width: 100%; opacity: .5; } }
-
-/* Info boxes */
-.infobox {
-  display: flex; gap: 6px; align-items: flex-start;
-  padding: var(--space-2xl);
-  border-radius: 8px;
-  font-size: 12px;
-  --icon: 20px;
-}
-.infobox[hidden] { display: none; }
-.infobox .icon { -webkit-mask-size: 16.67px; mask-size: 16.67px; }
-.infobox strong { display: block; font: 600 14px/1.35 Lato, sans-serif; margin-bottom: 6px; }
-.infobox.error { background: var(--shape-negative-4); box-shadow: inset 0 0 0 1px var(--shape-negative-4); color: var(--text-negative); }
-.infobox.success { background: var(--shape-positive-4); color: var(--text-positive); }
-.infobox p { margin: 0; word-break: break-word; }
-.files { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.files li { display: flex; align-items: center; gap: var(--space-2xl); }
+/* saved files */
+.files { list-style: none; margin: auto 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.files[hidden] { display: none; }
+.files li { display: flex; align-items: center; gap: 12px; padding-top: 8px; border-top: 1px solid rgb(166 230 255 / .14); }
+.files .f-tag { font: 700 11px/1 Lato, sans-serif; letter-spacing: .12em; padding: 4px 6px; border-radius: 3px; border: 1px solid currentColor; flex: none; }
 .files .f-meta { flex: 1; min-width: 0; }
-.files .f-name { color: var(--text-1); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.files .f-sub { color: var(--text-3); font-size: 11px; }
-.btn-m { height: 32px; padding: 0 10px; border-radius: 6px; font-size: 14px; --icon: 16px; flex: none; } /* Button M */
-.btn-m .icon { -webkit-mask-size: 13.33px; mask-size: 13.33px; }
+.files .f-name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.files .f-sub { font-size: 11px; color: var(--vfd-dim); letter-spacing: .04em; }
+.eject {
+  flex: none; display: inline-flex; align-items: center; gap: 6px;
+  height: 30px; padding: 0 10px; border-radius: 5px;
+  border: 1px solid rgb(166 230 255 / .35); background: rgb(166 230 255 / .06);
+  color: var(--vfd); font: 700 11px/1 Lato, sans-serif; letter-spacing: .12em; text-transform: uppercase;
+  cursor: pointer; --icon: 13px;
+}
+.eject:hover { background: rgb(166 230 255 / .14); }
 
-footer { font-size: 11px; color: var(--text-3); text-align: center; }
+.err { margin-top: auto; display: flex; gap: 10px; align-items: flex-start; color: var(--vfd-warn); text-shadow: 0 0 6px rgb(255 187 85 / .35); }
+.err[hidden] { display: none; }
+.err .icon { --icon: 18px; margin-top: 1px; }
+.err strong { display: block; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+.err p { margin: 2px 0 0; word-break: break-word; }
+
+/* ---------- Keys ---------- */
+.key {
+  position: relative;
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  min-width: 64px; height: 56px; padding: 0 14px;
+  border: 0; border-radius: 6px;
+  background: linear-gradient(180deg, var(--key-top), var(--key-bot));
+  color: var(--key-text);
+  font: 700 13px/1 Lato, sans-serif; letter-spacing: .06em;
+  box-shadow:
+    inset 0 1px 0 var(--key-shine),
+    inset 0 -2px 0 rgb(0 0 0 / .06),
+    0 0 0 1px var(--key-edge),
+    0 2px 0 rgb(0 0 0 / .22),
+    0 4px 6px -2px var(--key-drop);
+  transform: translateY(0);
+  transition: transform 90ms steps(2), box-shadow 90ms steps(2);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.key:hover { background: linear-gradient(180deg, var(--key-top), var(--key-top) 40%, var(--key-bot)); }
+.key:active, .key[aria-pressed="true"], .key[aria-checked="true"] {
+  transform: translateY(2px);
+  background: linear-gradient(180deg, var(--key-down-top), var(--key-down-bot));
+  box-shadow:
+    inset 0 1px 2px rgb(0 0 0 / .14),
+    0 0 0 1px var(--key-edge),
+    0 1px 0 rgb(0 0 0 / .2);
+}
+.key:disabled { cursor: default; opacity: .45; }
+.key:disabled:active { transform: none; }
+.key .led { width: 14px; height: 4px; border-radius: 2px; }
+:is(.key, .clear, .eject):focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.link-row:focus-within { border-bottom-color: var(--vfd); box-shadow: 0 1px 0 var(--vfd); }
+.window:has(#url:focus-visible) { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+/* transport */
+.transport { display: flex; flex-direction: column; gap: 10px; }
+.key-transport {
+  flex: 1; width: 100%; min-height: 150px; border-radius: 10px; gap: 12px;
+  font-size: 14px; letter-spacing: .16em; text-transform: uppercase;
+  --icon: 30px;
+}
+.key-transport .led { width: 34px; height: 5px; border-radius: 3px; }
+.key-transport.busy .led { background: radial-gradient(circle at 40% 35%, #cfe3ff, var(--led-on) 55%); box-shadow: 0 0 8px 1px var(--led-glow); animation: blink 1s steps(1) infinite; }
+.key-transport.ready .led { background: radial-gradient(circle at 40% 35%, #cfe3ff, var(--led-on) 55%); box-shadow: 0 0 0 1px rgb(0 40 120 / .35), 0 0 8px 1px var(--led-glow); }
+@keyframes blink { 50% { opacity: .25; } }
+.dest { font-size: 11px; line-height: 1.35; color: var(--engrave-soft); text-shadow: 0 1px 0 var(--engrave-hi); text-align: center; }
+
+/* key bank */
+.bank {
+  margin-top: 18px; padding-top: 16px;
+  border-top: 1px solid rgb(0 0 0 / .14);
+  box-shadow: inset 0 1px 0 var(--engrave-hi);
+  display: flex; flex-wrap: wrap; gap: 18px 26px; align-items: flex-end;
+}
+.group { display: flex; flex-direction: column; gap: 9px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.group.off .keys { opacity: .7; }
+.group.off .key > .led { background: var(--led-off); box-shadow: inset 0 1px 1px rgb(0 0 0 / .45); }
+.keys {
+  display: flex; gap: 6px; padding: 5px; border-radius: 9px;
+  background: var(--well);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / .28), 0 1px 0 var(--engrave-hi);
+}
+.keys .key { height: 52px; }
+.hint { flex-basis: 100%; min-height: 15px; font-size: 12px; color: var(--engrave-soft); text-shadow: 0 1px 0 var(--engrave-hi); }
+
+.foot { margin: 18px 0 0; text-align: center; font-size: 12px; color: var(--engrave); }
+
+@media (max-width: 760px) {
+  body { padding: 20px 12px; align-items: start; }
+  .unit { padding: 14px 14px 16px; }
+  .top .model { display: none; }
+  .deck { grid-template-columns: 1fr; gap: 14px; }
+  .vfd { min-height: 0; }
+  .thumb { width: 104px; }
+  .key-transport { min-height: 64px; flex-direction: row; --icon: 22px; }
+  .key-transport .led { position: absolute; top: 10px; left: 12px; width: 8px; height: 8px; border-radius: 50%; }
+  .bank { gap: 16px; }
+  .group, .keys { width: 100%; }
+  .keys .key { flex: 1 1 0; min-width: 0; padding: 0 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .key, .key-transport { transition: none; }
+  .meter.sweep i, .key-transport.busy .led, .video.loading .thumb { animation: none; }
+  .meter.sweep i { background: rgb(166 230 255 / .35); }
+}
 </style>
 </head>
 <body>
-<main>
-  <header>
-    <h1>YouTube converter</h1>
-    <p>Save a video as MP3 audio or MP4 video. Runs on this Mac with yt-dlp and FFmpeg.</p>
-  </header>
+<main class="rack">
+  <div class="unit">
+    <header class="top">
+      <span class="led on" aria-hidden="true"></span>
+      <h1 class="brand" style="margin:0;font:inherit">YouTube Converter</h1>
+      <span class="model">MP3 · MP4 · Local</span>
+    </header>
 
-  <section class="card">
-    <form class="field" id="field" autocomplete="off">
-      <label for="url">Video link</label>
-      <div class="field-box">
-        <span class="icon i-link" aria-hidden="true"></span>
-        <input id="url" name="url" type="url" inputmode="url" spellcheck="false"
-               placeholder="https://www.youtube.com/watch?v=…" aria-describedby="url-footer">
-        <span class="icon i-alert err-icon" aria-hidden="true"></span>
-        <button type="button" class="clear" id="clear" aria-label="Clear link"><span class="icon i-x" style="--icon:12px"></span></button>
+    <div class="deck">
+      <div class="window">
+        <section class="vfd" aria-label="Display">
+          <form class="link-row" id="field" autocomplete="off">
+            <label for="url" class="vfd-small">Link</label>
+            <input id="url" name="url" type="url" inputmode="url" spellcheck="false"
+                   placeholder="Paste a YouTube link" aria-describedby="status">
+            <button type="button" class="clear" id="clear" aria-label="Clear and start over"><span class="icon i-x"></span></button>
+          </form>
+
+          <div class="status vfd-small" id="status" aria-live="polite">Paste a link and press Return</div>
+
+          <div class="video glow" id="preview" hidden>
+            <img class="thumb" id="thumb" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+            <div class="meta">
+              <div class="title" id="title">&nbsp;</div>
+              <div class="sub" id="sub">&nbsp;</div>
+              <div class="lic" id="lic"></div>
+            </div>
+          </div>
+
+          <div class="readout" id="readout" aria-hidden="true">
+            <span class="seg glow"><span class="ghost" id="r-ghost">88:88</span><span class="val" id="r-dur">--:--</span></span>
+            <span class="vfd-small glow" id="r-out"></span>
+          </div>
+
+          <div class="run" id="progress" hidden aria-live="polite">
+            <div class="run-head">
+              <span class="vfd-small" id="p-label">Starting</span>
+              <span class="readouts glow">
+                <span aria-hidden="true"><span class="seg"><span class="ghost">888</span><span class="val" id="p-pct">!!0</span></span><span class="seg-unit">%</span></span>
+                <span class="vfd-small" id="p-speed"></span>
+                <span class="seg" aria-hidden="true"><span class="ghost">88:88</span><span class="val" id="p-eta">--:--</span></span>
+              </span>
+            </div>
+            <div class="meter" id="meter" role="progressbar" aria-labelledby="p-label" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+          <ul class="files glow" id="files" hidden aria-label="Saved files"></ul>
+
+          <div class="err" id="error" hidden role="alert">
+            <span class="icon i-alert" aria-hidden="true"></span>
+            <div><strong>Couldn't convert</strong><p id="error-msg"></p></div>
+          </div>
+        </section>
       </div>
-      <div class="footer" id="url-footer" aria-live="polite">Paste a link and press Enter.</div>
-    </form>
 
-    <div class="preview" id="preview" hidden>
-      <img class="thumb" id="thumb" alt="">
-      <div class="meta">
-        <div class="title" id="title">&nbsp;</div>
-        <div class="sub" id="sub">&nbsp;</div>
-        <div class="lic" id="lic"></div>
+      <div class="transport">
+        <button class="key key-transport" id="convert" disabled>
+          <span class="led" aria-hidden="true"></span>
+          <span class="icon i-download" aria-hidden="true"></span>
+          <span id="convert-label">Convert</span>
+        </button>
+        <div class="dest" id="dest"></div>
       </div>
     </div>
 
-    <div class="group">
-      <span id="fmt-label">Format <span style="font-weight:400;color:var(--text-3)">· pick one or both</span></span>
-      <div class="pills" role="group" aria-labelledby="fmt-label" id="formats">
-        <button type="button" class="pill" aria-pressed="true" data-value="mp3"><span class="icon i-check" aria-hidden="true"></span>MP3 audio</button>
-        <button type="button" class="pill" aria-pressed="false" data-value="mp4"><span class="icon i-check" aria-hidden="true"></span>MP4 video</button>
-      </div>
-    </div>
-
-    <div class="group quality" id="q-mp3">
-      <span id="q-mp3-label">MP3 quality</span>
-      <div class="pills" role="radiogroup" aria-labelledby="q-mp3-label"></div>
-      <div class="hint">YouTube audio is about 130–160 kbps, so 320 kbps makes a bigger file, not a better one.</div>
-    </div>
-
-    <div class="group quality" id="q-mp4" hidden>
-      <span id="q-mp4-label">MP4 resolution</span>
-      <div class="pills" role="radiogroup" aria-labelledby="q-mp4-label"></div>
-      <div class="hint"></div>
-    </div>
-
-    <div class="hint" id="dest">Saved to Downloads › YouTube Converter › MP3</div>
-
-    <button class="btn btn-primary btn-block" id="convert" disabled>
-      <span class="icon i-download" aria-hidden="true"></span>Convert
-    </button>
-
-    <div class="progress" id="progress" hidden aria-live="polite">
-      <div class="progress-row"><span id="p-label">Starting…</span><span class="stats" id="p-stats"></span></div>
-      <div class="bar" id="bar" role="progressbar" aria-labelledby="p-label" aria-valuemin="0" aria-valuemax="100"><div></div></div>
-    </div>
-
-    <div class="infobox success" id="done" hidden>
-      <span class="icon i-check" aria-hidden="true"></span>
-      <div style="flex:1;min-width:0">
-        <strong>Saved</strong>
-        <ul class="files" id="files"></ul>
-        <div class="actions" style="margin-top:12px">
-          <button class="btn btn-ghost" id="again" type="button"><span class="icon i-refresh" aria-hidden="true"></span>Convert another</button>
+    <div class="bank">
+      <div class="group" role="group" aria-labelledby="fmt-label">
+        <span class="legend" id="fmt-label">Format</span>
+        <div class="keys" id="formats">
+          <button type="button" class="key" aria-pressed="true" data-value="mp3"><span class="led" aria-hidden="true"></span>MP3</button>
+          <button type="button" class="key" aria-pressed="false" data-value="mp4"><span class="led" aria-hidden="true"></span>MP4</button>
         </div>
       </div>
+      <div class="group" id="q-mp3">
+        <span class="legend" id="q-mp3-label">MP3 · kbps</span>
+        <div class="keys" role="radiogroup" aria-labelledby="q-mp3-label"></div>
+      </div>
+      <div class="group" id="q-mp4">
+        <span class="legend" id="q-mp4-label">MP4 · Resolution</span>
+        <div class="keys" role="radiogroup" aria-labelledby="q-mp4-label"></div>
+      </div>
+      <div class="hint" id="hint"></div>
     </div>
-
-    <div class="infobox error" id="error" hidden role="alert">
-      <span class="icon i-alert" aria-hidden="true"></span>
-      <div><strong>Couldn't convert</strong><p id="error-msg"></p></div>
-    </div>
-  </section>
-
-  <footer>Only download videos you own or have permission to use, such as Creative Commons content.</footer>
+  </div>
+  <p class="foot">Only download videos you own or have permission to use, such as Creative Commons content.</p>
 </main>
 
 <script>
 const $ = (id) => document.getElementById(id);
-const MP3 = [["128", "128 kbps"], ["192", "192 kbps"], ["320", "320 kbps"]];
+const MP3 = [["128", "128"], ["192", "192"], ["320", "320"]];
+const SEGMENTS = 32;
 const state = { info: null, formats: new Set(["mp3"]), quality: { mp3: "192", mp4: "1080" }, busy: false, infoReq: 0 };
+
+$("meter").replaceChildren(...Array.from({ length: SEGMENTS }, (_, n) => {
+  const i = document.createElement("i"); i.style.setProperty("--n", n); return i;
+}));
 
 async function api(path, body) {
   const res = await fetch(path, body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : {});
@@ -337,7 +454,7 @@ async function api(path, body) {
 }
 
 function fmtDuration(s) {
-  if (!s && s !== 0) return "";
+  if (s == null) return "";
   const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = String(Math.floor(s % 60)).padStart(2, "0");
   return h ? `${h}:${String(m).padStart(2, "0")}:${sec}` : `${m}:${sec}`;
 }
@@ -348,26 +465,26 @@ function fmtBytes(b) {
   return `${b.toFixed(i ? 1 : 0)} ${u[i]}`;
 }
 
-function setFieldError(msg) {
-  $("field").classList.toggle("error", !!msg);
-  $("url").setAttribute("aria-invalid", msg ? "true" : "false");
-  $("url-footer").textContent = msg || (state.info ? "" : "Paste a link and press Enter.");
+function setStatus(msg, warn = false) {
+  $("status").textContent = msg;
+  $("status").classList.toggle("warn", warn);
+  $("url").setAttribute("aria-invalid", warn ? "true" : "false");
 }
 
-// Single-choice pills (role=radio inside a radiogroup).
-function renderRadioPills(el, options, selected, onPick) {
+function renderRadioKeys(el, options, selected, disabled, onPick) {
   el.replaceChildren(...options.map(([value, label]) => {
     const b = document.createElement("button");
-    b.type = "button"; b.className = "pill"; b.setAttribute("role", "radio"); b.dataset.value = value; b.textContent = label;
+    b.type = "button"; b.className = "key"; b.setAttribute("role", "radio"); b.dataset.value = value;
+    const led = document.createElement("span"); led.className = "led"; led.setAttribute("aria-hidden", "true");
+    b.append(led, label);
     b.setAttribute("aria-checked", String(value === selected));
     b.tabIndex = value === selected ? 0 : -1;
-    b.disabled = state.busy;
+    b.disabled = disabled;
     b.onclick = () => onPick(value);
     return b;
   }));
 }
 
-// Arrow-key navigation inside a radiogroup.
 document.addEventListener("keydown", (e) => {
   const group = e.target.closest?.('[role="radiogroup"]');
   if (!group || !["ArrowLeft", "ArrowRight"].includes(e.key)) return;
@@ -383,56 +500,75 @@ function defaultHeight() {
 }
 
 function renderControls() {
-  // Format: multi-select toggle pills; at least one stays on.
-  for (const b of $("formats").querySelectorAll(".pill")) {
+  for (const b of $("formats").querySelectorAll(".key")) {
     const on = state.formats.has(b.dataset.value);
     b.setAttribute("aria-pressed", String(on));
-    b.disabled = state.busy || (on && state.formats.size === 1);
+    b.disabled = state.busy;
+    // The last latched format can't be released; it stays visibly on.
+    b.title = on && state.formats.size === 1 ? "At least one format stays on" : "";
   }
-
   const mp3On = state.formats.has("mp3"), mp4On = state.formats.has("mp4");
-  $("q-mp3").hidden = !mp3On;
-  $("q-mp4").hidden = !mp4On;
-  if (mp3On) {
-    renderRadioPills($("q-mp3").querySelector(".pills"), MP3, state.quality.mp3, (v) => { state.quality.mp3 = v; renderControls(); });
-  }
-  if (mp4On) {
-    const heights = (state.info?.heights || [1080, 720, 480, 360]).filter((h) => h >= 360).slice(0, 5).reverse();
-    if (!heights.includes(Number(state.quality.mp4))) state.quality.mp4 = defaultHeight();
-    renderRadioPills($("q-mp4").querySelector(".pills"), heights.map((h) => [String(h), h >= 2160 ? "4K" : `${h}p`]),
-      state.quality.mp4, (v) => { state.quality.mp4 = v; renderControls(); });
-    $("q-mp4").querySelector(".hint").textContent = Number(state.quality.mp4) > 1080
-      ? "Above 1080p YouTube only has VP9/AV1 video, which some players (like QuickTime) can't open."
-      : "H.264 + AAC: plays everywhere, no re-encoding.";
-  }
+  $("q-mp3").classList.toggle("off", !mp3On);
+  $("q-mp4").classList.toggle("off", !mp4On);
 
-  const folders = [...state.formats].sort().map((f) => f.toUpperCase());
-  $("dest").textContent = `Saved to Downloads › YouTube Converter › ${folders.join(" and ")}`;
-  $("convert").disabled = !state.info || state.busy;
+  // Presets stay live: pressing one in a switched-off group also latches that format.
+  renderRadioKeys($("q-mp3").querySelector(".keys"), MP3, state.quality.mp3, state.busy,
+    (v) => { state.formats.add("mp3"); state.quality.mp3 = v; renderControls(); });
+
+  const heights = (state.info?.heights || [1080, 720, 480, 360]).filter((h) => h >= 360).slice(0, 5).reverse();
+  if (!heights.includes(Number(state.quality.mp4))) state.quality.mp4 = defaultHeight();
+  renderRadioKeys($("q-mp4").querySelector(".keys"), heights.map((h) => [String(h), h >= 2160 ? "4K" : `${h}p`]),
+    state.quality.mp4, state.busy, (v) => { state.formats.add("mp4"); state.quality.mp4 = v; renderControls(); });
+
+  const outs = [...state.formats].sort().map((f) => f === "mp3" ? `MP3 ${state.quality.mp3}` : `MP4 ${state.quality.mp4 >= 2160 ? "4K" : state.quality.mp4 + "P"}`);
+  $("r-out").textContent = outs.join(" + ");
+
+  const hints = [];
+  if (mp3On) hints.push(state.quality.mp3 === "320" ? "YouTube audio is about 130–160 kbps, so 320 makes a bigger file, not a better one." : "");
+  if (mp4On) hints.push(Number(state.quality.mp4) > 1080 ? "Above 1080p YouTube only has VP9/AV1 video, which QuickTime can't open." : "MP4 up to 1080p is H.264 + AAC and plays everywhere.");
+  $("hint").textContent = hints.filter(Boolean).join(" ");
+
+  const folders = [...state.formats].sort().map((f) => f.toUpperCase()).join(" + ");
+  $("dest").textContent = `Saves to Downloads › YouTube Converter › ${folders}`;
+  const btn = $("convert");
+  btn.disabled = !state.info || state.busy;
+  btn.classList.toggle("ready", !!state.info && !state.busy);
+  btn.classList.toggle("busy", state.busy);
+  $("convert-label").textContent = state.busy ? "Working" : "Convert";
 }
 
 $("formats").addEventListener("click", (e) => {
-  const b = e.target.closest(".pill");
+  const b = e.target.closest(".key");
   if (!b || b.disabled) return;
   const f = b.dataset.value;
-  if (state.formats.has(f)) state.formats.delete(f); else state.formats.add(f);
+  if (state.formats.has(f)) { if (state.formats.size > 1) state.formats.delete(f); } else state.formats.add(f);
   renderControls();
 });
 
+function resetOutput() {
+  $("error").hidden = true; $("files").hidden = true; $("progress").hidden = true;
+  $("readout").hidden = false;
+}
+
+function setDuration(s) {
+  const long = s != null && s >= 3600;
+  $("r-ghost").textContent = long ? "8:88:88" : "88:88";
+  $("r-dur").textContent = s == null ? "--:--" : (long ? fmtDuration(s) : fmtDuration(s).padStart(5, "0"));
+}
+
 async function loadInfo() {
   const url = $("url").value.trim();
-  $("error").hidden = true;
-  if (!url) { state.info = null; $("preview").hidden = true; setFieldError(""); renderControls(); return; }
+  if (!url) { state.info = null; $("preview").hidden = true; setStatus("Paste a link and press Return"); renderControls(); return; }
   if (state.info && state.info._input === url) return;
 
+  resetOutput();
   const req = ++state.infoReq;
   state.info = null;
   renderControls();
   $("preview").hidden = false;
-  $("preview").classList.add("skeleton");
-  $("thumb").removeAttribute("src");
-  setFieldError("");
-  $("url-footer").textContent = "Looking up video…";
+  $("preview").classList.add("loading");
+  $("thumb").src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+  setStatus("Looking up video…");
   try {
     const info = await api("/api/info", { url });
     if (req !== state.infoReq) return;
@@ -442,64 +578,75 @@ async function loadInfo() {
     $("title").textContent = info.title;
     $("sub").textContent = [info.channel, fmtDuration(info.duration)].filter(Boolean).join(" · ");
     $("lic").textContent = info.license || "";
-    $("preview").classList.remove("skeleton");
-    setFieldError("");
+    $("preview").classList.remove("loading");
+    setDuration(info.duration);
+    setStatus("Ready");
     state.quality.mp4 = defaultHeight();
   } catch (err) {
     if (req !== state.infoReq) return;
     $("preview").hidden = true;
-    setFieldError(err.message);
+    setDuration(null);
+    setStatus(err.message, true);
   }
   renderControls();
 }
 
 function showProgress(job) {
-  const bar = $("bar");
   const p = job.percent || 0;
   const fmt = (job.current || "").toUpperCase();
-  const prefix = job.tasks > 1 ? `${fmt} (${job.task} of ${job.tasks}) · ` : "";
+  const prefix = job.tasks > 1 ? `${fmt} ${job.task}/${job.tasks} · ` : (fmt ? `${fmt} · ` : "");
   const labels = {
-    queued: "Starting…",
+    queued: "Starting",
     downloading: job.streams > 1 ? `Downloading ${job.stream === 1 ? "video" : "audio"}` : "Downloading audio",
-    converting: "Converting to MP3…",
-    merging: "Combining video and audio…",
+    converting: "Encoding MP3",
+    merging: "Joining video + audio",
   };
-  $("p-label").textContent = prefix + (labels[job.phase] || "Working…");
-  $("p-stats").textContent = job.phase === "downloading"
-    ? [`${Math.round(p)}%`, job.speed ? `${fmtBytes(job.speed)}/s` : "", job.eta != null ? `${fmtDuration(job.eta)} left` : ""].filter(Boolean).join(" · ")
-    : "";
+  $("p-label").textContent = prefix + (labels[job.phase] || "Working");
   const indeterminate = ["queued", "converting", "merging"].includes(job.phase);
-  bar.classList.toggle("indeterminate", indeterminate);
-  bar.firstElementChild.style.width = indeterminate ? "" : `${p}%`;
-  bar.setAttribute("aria-valuenow", String(Math.round(p)));
+  $("p-pct").textContent = String(Math.round(p)).padStart(3, "!"); // "!" is DSEG's blank digit
+  $("p-speed").textContent = job.phase === "downloading" && job.speed ? `${fmtBytes(job.speed)}/s` : "";
+  const eta = job.phase === "downloading" && job.eta != null ? job.eta : null;
+  $("p-eta").textContent = eta == null ? "--:--" : `${String(Math.floor(eta / 60)).padStart(2, "0")}:${String(eta % 60).padStart(2, "0")}`;
+  const meter = $("meter");
+  meter.classList.toggle("sweep", indeterminate);
+  const lit = indeterminate ? 0 : Math.round((p / 100) * SEGMENTS);
+  [...meter.children].forEach((s, i) => s.classList.toggle("lit", i < lit));
+  meter.setAttribute("aria-valuenow", String(Math.round(p)));
 }
 
 function setBusy(busy) {
   state.busy = busy;
   $("url").disabled = busy;
+  $("clear").disabled = busy;
   renderControls();
 }
 
 function renderFiles(jobId, files) {
   $("files").replaceChildren(...files.map((f, i) => {
     const li = document.createElement("li");
+    const tag = document.createElement("span"); tag.className = "f-tag"; tag.textContent = f.format.toUpperCase();
     const meta = document.createElement("div"); meta.className = "f-meta";
     const name = document.createElement("div"); name.className = "f-name"; name.textContent = f.name; name.title = f.name;
-    const sub = document.createElement("div"); sub.className = "f-sub"; sub.textContent = `${f.folder} · ${fmtBytes(f.size)}`;
+    const sub = document.createElement("div"); sub.className = "f-sub"; sub.textContent = `Saved · ${f.folder} · ${fmtBytes(f.size)}`;
     meta.append(name, sub);
     const btn = document.createElement("button");
-    btn.type = "button"; btn.className = "btn btn-secondary btn-m"; btn.textContent = "Show in Finder";
+    btn.type = "button"; btn.className = "eject";
+    btn.innerHTML = '<span class="icon i-eject" aria-hidden="true"></span>Show in Finder';
+    btn.setAttribute("aria-label", `Show ${f.format.toUpperCase()} file in Finder`);
     btn.onclick = () => api(`/api/jobs/${jobId}/reveal/${i}`, {}).catch((err) => { sub.textContent = err.message; });
-    li.append(meta, btn);
+    li.append(tag, meta, btn);
     return li;
   }));
+  $("files").hidden = false;
 }
 
 async function convert() {
   if (!state.info || state.busy) return;
-  $("error").hidden = true; $("done").hidden = true;
+  resetOutput();
   setBusy(true);
+  $("readout").hidden = true;
   $("progress").hidden = false;
+  setStatus("Converting");
   showProgress({ phase: "queued" });
   let id, job;
   try {
@@ -511,14 +658,17 @@ async function convert() {
       showProgress(job);
     } while (job.phase !== "done" && job.phase !== "error");
     if (job.phase === "error") throw new Error(job.error);
+    setStatus(job.files.length > 1 ? "Both files saved" : "Saved");
   } catch (err) {
     $("error-msg").textContent = job?.files?.length
       ? `${err.message} (${job.files.map((f) => f.format.toUpperCase()).join(", ")} was saved.)`
       : err.message;
     $("error").hidden = false;
+    setStatus("Stopped", true);
   } finally {
     $("progress").hidden = true;
-    if (job?.files?.length) { renderFiles(id, job.files); $("done").hidden = false; }
+    if (job?.files?.length) renderFiles(id, job.files);
+    $("readout").hidden = !$("files").hidden || !$("error").hidden;
     setBusy(false);
   }
 }
@@ -528,14 +678,14 @@ $("url").addEventListener("paste", () => setTimeout(loadInfo, 0));
 $("url").addEventListener("blur", loadInfo);
 $("url").addEventListener("input", () => {
   $("clear").classList.toggle("show", !!$("url").value);
-  if ($("field").classList.contains("error")) setFieldError("");
+  if ($("status").classList.contains("warn")) setStatus("Press Return to look it up");
 });
-$("clear").addEventListener("click", () => { $("url").value = ""; $("clear").classList.remove("show"); $("url").focus(); loadInfo(); });
+$("clear").addEventListener("click", () => {
+  $("url").value = ""; $("clear").classList.remove("show");
+  resetOutput(); state.info = null; $("preview").hidden = true; setDuration(null);
+  setStatus("Paste a link and press Return"); renderControls(); $("url").focus();
+});
 $("convert").addEventListener("click", convert);
-$("again").addEventListener("click", () => {
-  $("done").hidden = true; $("url").value = ""; $("clear").classList.remove("show");
-  state.info = null; $("preview").hidden = true; setFieldError(""); renderControls(); $("url").focus();
-});
 
 renderControls();
 </script>
