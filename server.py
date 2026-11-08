@@ -77,7 +77,8 @@ def fetch_info(url):
         raise UserError("Playlists aren't supported. Paste a single video link.")
     if info.get("is_live"):
         raise UserError("Live streams can't be converted.")
-    heights = {f.get("height") for f in info.get("formats", []) if f.get("vcodec") not in (None, "none")}
+    tiers = {tier for f in info.get("formats", []) if f.get("vcodec") not in (None, "none")
+             if (tier := quality_tier(f.get("width"), f.get("height")))}
     return {
         "id": info.get("id"),
         "url": info.get("webpage_url") or url,
@@ -86,8 +87,21 @@ def fetch_info(url):
         "duration": info.get("duration"),
         "thumbnail": info.get("thumbnail"),
         "license": info.get("license"),
-        "heights": [h for h in MP4_HEIGHTS if h in heights],
+        "heights": [h for h in MP4_HEIGHTS if h in tiers],
     }
+
+
+def quality_tier(width, height):
+    """Map a stream's size to YouTube's quality label (720p, 1080p, ...).
+
+    Labels follow the short side of a 16:9 frame, so letterboxed video such as
+    1280x602 counts as 720p and portrait 1080x1920 as 1080p. yt-dlp's `res:<tier>`
+    sort (smallest dimension <= tier) then picks the matching stream.
+    """
+    if not width or not height:
+        return None
+    basis = min(width, height) if width / height <= 16 / 9 else width * 9 / 16
+    return next((t for t in MP4_HEIGHTS if t <= basis * 1.05), None)
 
 
 def download_opts(fmt, quality, job_dir):

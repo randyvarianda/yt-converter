@@ -248,11 +248,11 @@ A near-monochrome metal palette with two lit accents: ice-blue phosphor inside t
 
 ## Layout
 
-One centred faceplate, max 920px wide, on a full-height desk with 40px/16px page padding. Inside the plate: a header row (power LED, brand legend, model line pushed right), then the **deck**, a two-column grid of the display window (fluid) and a 168px transport column, 18px apart, then the **bank**, separated by an engraved rule (dark 1px line with highlight beneath), holding the key groups in a wrapping row with 18px row and 26px column gaps. A bottom row spans the bank: the quality hint on the left, the engraved destination note ("Saves to Downloads › YouTube Converter › …") pushed right. The MP4 resolution group is hidden entirely while MP4 is off.
+One centred faceplate, max 920px wide, on a full-height desk with 40px/16px page padding. Inside the plate: a header row (power LED, brand legend, model line pushed right), then the **deck**, a two-column grid of the display window (fluid) and a 168px transport column, 18px apart, then the **bank**, separated by an engraved rule (dark 1px line with highlight beneath), holding the key groups in a wrapping row with 18px row and 26px column gaps. A bottom block spans the bank, left-aligned: the quality hint, then the engraved destination note ("Saves to Downloads › YouTube Converter › …") beneath it. The MP4 resolution group is hidden entirely while MP4 is off.
 
 Spacing moves in small physical steps: 6px between keys, 8–12px inside the glass, 14–18px between major regions. The glass is a vertical flex stack with 12px gaps; the readout, run block, file list and error each push to the bottom of the glass (`margin-top: auto`) so the lower edge of the display is where results appear.
 
-At 760px and below the deck stacks to one column, the plate padding tightens to 14px, the model line is dropped, the glass loses its 236px minimum height, the transport key becomes a 64px horizontal bar, the destination note wraps under the hint left-aligned, and each key well and its keys stretch to full width with keys sharing it equally.
+At 760px and below the deck stacks to one column, the plate padding tightens to 14px, the model line is dropped, the glass loses its 236px minimum height, the transport key becomes a 64px horizontal bar,  and each key well and its keys stretch to full width with keys sharing it equally.
 
 ## Elevation & Depth
 
@@ -294,7 +294,7 @@ Tactile, decisive, latching. The core control of the system.
 
 ### Transport Key
 - The single big action: fills the 168px transport column, at least 150px tall, `rounded.transport`, 30px download icon, uppercase wide-tracked label. No separate LED: the download icon itself is the indicator, drawn as unlit grey lines (`led-off`) and lit as glowing Indicator Blue lines (two stacked drop-shadows on a wrapper, since the icon is masked).
-- **Ready:** icon lit steady. **Busy:** icon blinks at 1s `steps(1)` and the label reads "Working". **Disabled** until a video is looked up.
+- **Ready:** icon lit steady and the key's 1px outline lights as a glowing Indicator Blue line. **Busy:** outline stays lit, icon blinks at 1s `steps(1)` and the label reads "Working". **Disabled** until a video is looked up.
 - Compact: 64px horizontal bar, icon 22px.
 
 ### Display Window (signature component)
