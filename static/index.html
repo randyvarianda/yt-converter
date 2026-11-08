@@ -295,34 +295,48 @@ body {
 .link-row:focus-within { border-bottom-color: var(--vfd); box-shadow: 0 1px 0 var(--vfd); }
 .window:has(#url:focus-visible) { outline: 2px solid var(--focus); outline-offset: 3px; }
 
-/* transport */
-.transport { display: flex; flex-direction: column; gap: 10px; }
-.key-transport {
-  flex: 1; width: 100%; min-height: 150px; border-radius: 10px; gap: 12px;
-  font-size: 14px; letter-spacing: .16em; text-transform: uppercase;
-  --icon: 30px;
+/* transport: LED-ring knob. The ring is the indicator and the progress meter. */
+.transport { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+.dial { --size: 156px; --r: 66px; --seg-h: 11px; position: relative; width: var(--size); height: var(--size); flex: none; }
+.ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: var(--well);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / .28), 0 1px 0 var(--engrave-hi);
 }
-/* The icon is the indicator: unlit grey lines, lit as glowing blue lines when ready.
-   drop-shadow sits on the wrapper because the icon itself is masked. */
-.key-transport .glyph { display: inline-flex; color: var(--led-off); }
-.key-transport.ready .glyph, .key-transport.busy .glyph {
-  color: var(--led-on);
-  filter: drop-shadow(0 0 2px var(--led-glow)) drop-shadow(0 0 7px var(--led-glow));
+.ring i {
+  position: absolute; left: 50%; top: 50%;
+  width: 4px; height: var(--seg-h); margin: calc(var(--seg-h) / -2) 0 0 -2px; border-radius: 2px;
+  background: var(--led-off); opacity: .6;
+  transform: rotate(calc(var(--n) * 15deg)) translateY(calc(var(--r) * -1));
 }
-.key-transport.busy .glyph { animation: blink 1s steps(1) infinite; }
-/* Ready to convert: the key's outline lights as a glowing blue line too. */
-.key-transport.ready, .key-transport.busy {
+.ring i.lit, .dial.ready .ring i { background: var(--led-on); opacity: 1; box-shadow: 0 0 6px var(--led-glow); }
+.dial.sweep .ring i { animation: ring-sweep 1.2s steps(1) infinite; animation-delay: calc(var(--n) * 50ms); }
+@keyframes ring-sweep { 0%, 8% { background: var(--led-on); opacity: 1; box-shadow: 0 0 6px var(--led-glow); } 9%, 100% { background: var(--led-off); opacity: .6; box-shadow: none; } }
+.knob {
+  position: absolute; inset: calc(var(--size) * .135); border-radius: 50%; border: 0; padding: 0;
+  display: grid; place-items: center; cursor: pointer; --icon: 30px;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, transparent 0 1px, var(--hairline) 1px 2px),
+    radial-gradient(circle at 50% 28%, var(--key-top), var(--key-bot) 72%);
   box-shadow:
     inset 0 1px 0 var(--key-shine),
     inset 0 -2px 0 rgb(0 0 0 / .06),
-    0 0 0 1px var(--led-on),
-    0 0 10px 1px var(--led-glow),
-    0 2px 0 rgb(0 0 0 / .22),
-    0 4px 6px -2px var(--key-drop);
+    0 0 0 1px var(--key-edge),
+    0 3px 0 rgb(0 0 0 / .2),
+    0 8px 14px -4px var(--key-drop);
+  transition: transform 90ms steps(2), box-shadow 90ms steps(2);
+  -webkit-tap-highlight-color: transparent;
 }
-.key-transport.ready:active {
-  box-shadow: inset 0 1px 2px rgb(0 0 0 / .14), 0 0 0 1px var(--led-on), 0 0 6px var(--led-glow);
+.knob:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 3px rgb(0 0 0 / .14), 0 0 0 1px var(--key-edge), 0 1px 0 rgb(0 0 0 / .2);
 }
+.knob:disabled { cursor: default; }
+.knob:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+/* drop-shadow sits on the wrapper because the icon itself is masked */
+.glyph { display: inline-flex; color: var(--led-off); }
+.dial.ready .glyph, .dial.busy .glyph { color: var(--led-on); filter: drop-shadow(0 0 2px var(--led-glow)) drop-shadow(0 0 7px var(--led-glow)); }
+.transport .legend { letter-spacing: .2em; }
 @keyframes blink { 50% { opacity: .25; } }
 .dest { font-size: 12px; color: var(--engrave-soft); text-shadow: 0 1px 0 var(--engrave-hi); }
 
@@ -356,14 +370,16 @@ body {
   .deck { grid-template-columns: 1fr; gap: 14px; }
   .vfd { min-height: 0; }
   .thumb { width: 104px; }
-  .key-transport { min-height: 64px; flex-direction: row; --icon: 22px; }
+  .transport { flex-direction: row; gap: 18px; }
+  .dial { --size: 112px; --r: 47px; --seg-h: 8px; }
+  .knob { --icon: 24px; }
   .bank { gap: 16px; }
   .group, .keys { width: 100%; }
   .keys .key { flex: 1 1 0; min-width: 0; padding: 0 6px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .key, .key-transport { transition: none; }
-  .meter.sweep i, .key-transport.busy .glyph, .video.loading .thumb { animation: none; }
+  .key, .knob { transition: none; }
+  .meter.sweep i, .dial.sweep .ring i, .video.loading .thumb { animation: none; }
   .meter.sweep i { background: rgb(166 230 255 / .35); }
 }
 </style>
@@ -425,10 +441,13 @@ body {
       </div>
 
       <div class="transport">
-        <button class="key key-transport" id="convert" disabled>
-          <span class="glyph" aria-hidden="true"><span class="icon i-download"></span></span>
-          <span id="convert-label">Convert</span>
-        </button>
+        <div class="dial" id="dial">
+          <div class="ring" id="ring" aria-hidden="true"></div>
+          <button class="knob" id="convert" disabled aria-labelledby="convert-label">
+            <span class="glyph" aria-hidden="true"><span class="icon i-download"></span></span>
+          </button>
+        </div>
+        <span class="legend" id="convert-label">Convert</span>
       </div>
     </div>
 
@@ -463,6 +482,10 @@ const MP3 = [["128", "128"], ["192", "192"], ["320", "320"]];
 const SEGMENTS = 32;
 const state = { info: null, formats: new Set(["mp3"]), quality: { mp3: "192", mp4: "1080" }, busy: false, infoReq: 0 };
 
+const RING = 24;
+$("ring").replaceChildren(...Array.from({ length: RING }, (_, n) => {
+  const i = document.createElement("i"); i.style.setProperty("--n", n); return i;
+}));
 $("meter").replaceChildren(...Array.from({ length: SEGMENTS }, (_, n) => {
   const i = document.createElement("i"); i.style.setProperty("--n", n); return i;
 }));
@@ -553,8 +576,9 @@ function renderControls() {
   $("dest").textContent = `Saves to Downloads › YouTube Converter › ${folders}`;
   const btn = $("convert");
   btn.disabled = !state.info || state.busy;
-  btn.classList.toggle("ready", !!state.info && !state.busy);
-  btn.classList.toggle("busy", state.busy);
+  $("dial").classList.toggle("ready", !!state.info && !state.busy);
+  $("dial").classList.toggle("busy", state.busy);
+  if (!state.busy) { $("dial").classList.remove("sweep"); setRing(0); }
   $("convert-label").textContent = state.busy ? "Working" : "Convert";
 }
 
@@ -633,6 +657,16 @@ function showProgress(job) {
   const lit = indeterminate ? 0 : Math.round((p / 100) * SEGMENTS);
   [...meter.children].forEach((s, i) => s.classList.toggle("lit", i < lit));
   meter.setAttribute("aria-valuenow", String(Math.round(p)));
+
+  // The knob's ring shows the whole job (all formats), not just the current one.
+  $("dial").classList.toggle("sweep", indeterminate);
+  const tasks = job.tasks || 1, task = job.task || 1;
+  setRing(indeterminate ? 0 : ((task - 1) + p / 100) / tasks);
+}
+
+function setRing(fraction) {
+  const lit = Math.round(fraction * RING);
+  [...$("ring").children].forEach((s, i) => s.classList.toggle("lit", i < lit));
 }
 
 function setBusy(busy) {

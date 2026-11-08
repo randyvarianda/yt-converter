@@ -199,7 +199,7 @@ Confirmed rejections from the user: mushy, low-contrast neumorphism (same-colour
 A near-monochrome metal palette with two lit accents: ice-blue phosphor inside the glass, saturated blue LED on the plate.
 
 ### Primary
-- **Indicator Blue** (`led-on`): the LED pip on every latched key, the power LED, the transport key's lit icon, keyboard focus rings and text selection. It is the only saturated colour on the metal. Always carries its glow (`--led-glow`, 65% of itself) and a radial hot spot (`#cfe3ff` at 40%/35%).
+- **Indicator Blue** (`led-on`): the LED pip on every latched key, the power LED, the transport knob's LED ring and icon, keyboard focus rings and text selection. It is the only saturated colour on the metal. Always carries its glow (`--led-glow`, 65% of itself) and a radial hot spot (`#cfe3ff` at 40%/35%).
 
 ### Secondary
 - **Ice Phosphor** (`vfd`): all text and segments inside the display glass: link input, caret, video title, readouts, lit meter segments, file names, eject and clear keys. Its derived steps do the hierarchy: **Dim Phosphor** (`vfd-dim`, 62%) for labels, placeholders and secondary meta; **Ghost Segment** (`vfd-ghost`, 7%) for unlit seven-segment digits and unlit meter cells. Inside the glass, hairlines run at 12–18% of Ice Phosphor, key outlines at 30–35%, and fills at 6–14%.
@@ -292,10 +292,11 @@ Tactile, decisive, latching. The core control of the system.
 - Format keys (multi-latch, at least one stays on) and preset keys (one per row, radio behaviour with arrow-key roving) sit in recessed wells: `--well` fill, 5px padding, 6px between keys, engraved legend above.
 - A group whose format is off dims to 70% and its LEDs go out, but stays pressable; pressing a preset there latches its format too.
 
-### Transport Key
-- The single big action: fills the 168px transport column, at least 150px tall, `rounded.transport`, 30px download icon, uppercase wide-tracked label. No separate LED: the download icon itself is the indicator, drawn as unlit grey lines (`led-off`) and lit as glowing Indicator Blue lines (two stacked drop-shadows on a wrapper, since the icon is masked).
-- **Ready:** icon lit steady and the key's 1px outline lights as a glowing Indicator Blue line. **Busy:** outline stays lit, icon blinks at 1s `steps(1)` and the label reads "Working". **Disabled** until a video is looked up.
-- Compact: 64px horizontal bar, icon 22px.
+### Transport Knob (LED-ring)
+- The single big action: a round push-knob (156px dial, 112px compact) centred in the 168px transport column, with the engraved legend "Convert" (reads "Working" while busy) beneath it (beside it on compact).
+- **Ring:** 24 LED segments (4×11px, 8px compact) set radially in a recessed circular well around the knob. The ring is both the indicator and the job meter: unlit grey (`led-off` at 60%) with no video; fully lit Indicator Blue with glow when ready; while converting it fills clockwise from 12 o'clock with the whole job's progress (all formats, not just the current one); during start, encode and merge a single lit segment chases round it in 50ms `steps(1)` hops.
+- **Knob face:** machined concentric hairlines over a radial key gradient, hard 1px edge, 3px side wall; presses 2px at 90ms `steps(2)`. The download icon in its centre is grey when idle and glowing blue lines when ready or busy.
+- **Disabled** until a video is looked up; focus is a 2px ring offset 4px, following the round shape.
 
 ### Display Window (signature component)
 - A bezel ring (9px radius, 4px) holding the black glass (6px radius), min 236px tall on desktop, with a faint top-left phosphor bloom and a diagonal reflection.
