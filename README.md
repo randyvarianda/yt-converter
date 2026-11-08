@@ -31,6 +31,20 @@ When YouTube changes something and conversions start failing, update yt-dlp:
 .venv/bin/pip install -U "yt-dlp[default]"
 ```
 
+### Mac app shortcut
+
+```bash
+./install-app.sh
+```
+
+This adds **YouTube Converter.app** to `~/Applications`. Open it from Spotlight or Launchpad, or drag it to the Dock. It starts the server in the background if it isn't already running and opens the page in your browser. Logs go to `~/Library/Logs/yt-converter.log`. To stop the server:
+
+```bash
+pkill -f yt-converter/server.py
+```
+
+Run `./install-app.sh` again if you move this folder.
+
 "Show in Finder" is macOS-only; everything else should work on Linux too.
 
 ## How it works

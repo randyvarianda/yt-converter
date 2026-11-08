@@ -16,4 +16,4 @@ if [ ! -x .venv/bin/python ]; then
   .venv/bin/pip install -q --upgrade pip
   .venv/bin/pip install -q "yt-dlp[default]"
 fi
-exec .venv/bin/python server.py "${1:-8765}"
+exec "$PWD/.venv/bin/python" "$PWD/server.py" "${1:-8765}"
