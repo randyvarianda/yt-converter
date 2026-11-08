@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube Converter</title>
+<meta name="description" content="A small local app that saves YouTube videos as MP3 or MP4 on your own computer, using yt-dlp and FFmpeg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f5f5; --card: #fff; --text: #000; --text-2: rgb(0 0 0 / .65); --text-3: rgb(0 0 0 / .48);
+  --primary: #3278f0; --primary-text: #2264d4; --line: rgb(0 0 0 / .10); --code: rgb(0 0 0 / .04);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111111; --card: #1c1c1c; --text: #f6f6f6; --text-2: rgb(255 255 255 / .88); --text-3: rgb(255 255 255 / .6);
+    --primary-text: #7aabff; --line: rgb(255 255 255 / .14); --code: rgb(255 255 255 / .08);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111111; --card: #1c1c1c; --text: #f6f6f6; --text-2: rgb(255 255 255 / .88); --text-3: rgb(255 255 255 / .6);
+  --primary-text: #7aabff; --line: rgb(255 255 255 / .14); --code: rgb(255 255 255 / .08);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 16px/1.6 Lato, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+main { max-width: 760px; margin: 0 auto; padding: 64px 16px 48px; }
+h1 { font-size: 36px; line-height: 1.15; margin: 0 0 12px; letter-spacing: -.01em; }
+h2 { font-size: 20px; margin: 48px 0 12px; }
+p, li { color: var(--text-2); }
+.lede { font-size: 18px; max-width: 58ch; margin: 0 0 24px; }
+a { color: var(--primary-text); }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+.btn { display: inline-flex; align-items: center; height: 44px; padding: 0 18px; border-radius: 8px; font-weight: 700; text-decoration: none; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-secondary { background: var(--code); color: var(--text); }
+figure { margin: 0; }
+.shot { display: block; width: 100%; max-width: 560px; margin: 0 auto; height: auto; border-radius: 12px; border: 1px solid var(--line); }
+figcaption { text-align: center; font-size: 13px; color: var(--text-3); margin-top: 8px; }
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; padding: 0; list-style: none; }
+.features li { background: var(--card); border-radius: 10px; padding: 16px; }
+.features strong { display: block; color: var(--text); margin-bottom: 4px; }
+pre { background: var(--card); border-radius: 10px; padding: 16px; overflow-x: auto; font: 14px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; background: var(--code); padding: 1px 5px; border-radius: 4px; }
+pre code { background: none; padding: 0; }
+.note { background: var(--card); border-left: 3px solid var(--primary); border-radius: 0 10px 10px 0; padding: 12px 16px; }
+footer { margin-top: 56px; font-size: 13px; color: var(--text-3); }
+footer p { color: var(--text-3); }
+</style>
+</head>
+<body>
+<main>
+  <h1>YouTube Converter</h1>
+  <p class="lede">A small app that saves a YouTube video as MP3 audio, MP4 video, or both, straight into your Downloads folder. It runs on your own computer, not on a website.</p>
+  <div class="cta">
+    <a class="btn btn-primary" href="https://github.com/randyvarianda/yt-converter">View on GitHub</a>
+    <a class="btn btn-secondary" href="#install">How to install</a>
+  </div>
+
+  <figure>
+    <img class="shot" src="screenshot.jpg" width="560" height="640" alt="The app: a video link field with a preview of the video, MP3 and MP4 format pills, quality options and a Convert button.">
+    <figcaption>Preview shows <em>Big Buck Bunny</em> © Blender Foundation, CC BY 3.0.</figcaption>
+  </figure>
+
+  <h2>What it does</h2>
+  <ul class="features">
+    <li><strong>MP3, MP4 or both</strong>One click makes both files from the same link.</li>
+    <li><strong>Pick the quality</strong>128–320 kbps audio; 360p up to 4K video.</li>
+    <li><strong>Sorted folders</strong>Saved to <code>Downloads/YouTube Converter/MP3</code> and <code>/MP4</code>.</li>
+    <li><strong>No ads, no uploads</strong>Everything happens on your machine.</li>
+  </ul>
+
+  <h2 id="install">Install and run</h2>
+  <p>You need <strong>Python 3.10+</strong>, <strong>FFmpeg</strong> and <strong>Node.js</strong>. On a Mac with Homebrew:</p>
+<pre><code>brew install python ffmpeg node
+git clone https://github.com/randyvarianda/yt-converter.git
+cd yt-converter
+./run.sh</code></pre>
+  <p>Then open <a href="http://127.0.0.1:8765">http://127.0.0.1:8765</a>. The first run sets up its own Python environment with <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a>.</p>
+  <p>If conversions start failing, YouTube has probably changed something. Update yt-dlp:</p>
+<pre><code>.venv/bin/pip install -U "yt-dlp[default]"</code></pre>
+
+  <h2>Why isn't this a website?</h2>
+  <p>Converting needs a program running on a computer: yt-dlp to get the video's streams from YouTube and FFmpeg to turn them into MP3 or MP4. A static page like this one can't run either, and online converter sites that do run them break YouTube's terms and get blocked. Running the app on your own machine avoids both problems.</p>
+
+  <p class="note">Only download videos you own or have permission to use, such as your own uploads or Creative Commons content. Downloading other videos may break YouTube's Terms of Service and copyright law where you live.</p>
+
+  <footer>
+    <p>MIT licensed. Built on <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> and <a href="https://ffmpeg.org">FFmpeg</a>, with Lato (SIL OFL) and Lucide icons (ISC). Not affiliated with YouTube or Google.</p>
+  </footer>
+</main>
+</body>
+</html>

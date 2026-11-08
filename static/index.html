@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube Converter</title>
+<style>
+/* Colour, spacing and type tokens. Lato (SIL OFL) and Lucide icons (ISC) are bundled. */
+@font-face { font-family: Lato; src: url(fonts/Lato-Regular.ttf); font-weight: 400; }
+@font-face { font-family: Lato; src: url(fonts/Lato-SemiBold.ttf); font-weight: 600; }
+@font-face { font-family: Lato; src: url(fonts/Lato-Bold.ttf); font-weight: 700; }
+
+:root {
+  --text-1: #000;
+  --text-2: rgb(0 0 0 / .65);
+  --text-3: rgb(0 0 0 / .48);
+  --text-primary: #2264d4;
+  --text-positive: #0c8a5c;
+  --text-negative: #c93030;
+  --text-placeholder: rgb(0 0 0 / .34);
+  --shape-primary: #3278f0;
+  --shape-on-primary: #fff;
+  --shape-neutral-2: rgb(0 0 0 / .16);
+  --shape-neutral-3: rgb(0 0 0 / .10);
+  --shape-neutral-4: rgb(0 0 0 / .04);
+  --shape-negative: #e84444;
+  --shape-negative-4: rgb(232 68 68 / .08);
+  --shape-primary-4: rgb(50 120 240 / .10);
+  --shape-positive-4: rgb(28 184 126 / .11);
+  --page: #f5f5f5;          /* UI/Page/Grouped 1 */
+  --card: #fff;             /* UI/Page/Grouped 2 */
+  --space-s: 4px;           /* Spacing/Small */
+  --space-2xl: 12px;        /* Spacing/2X Large */
+  --radius-xl: 10px;        /* Content/XLarge */
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-1: #f6f6f6;
+    --text-2: rgb(255 255 255 / .88);
+    --text-3: rgb(255 255 255 / .6);
+    --text-primary: #7aabff;
+    --text-positive: #1dd58d;
+    --text-negative: #ff7a85;
+    --text-placeholder: rgb(255 255 255 / .4);
+    --shape-neutral-2: rgb(255 255 255 / .26);
+    --shape-neutral-3: rgb(255 255 255 / .14);
+    --shape-neutral-4: rgb(255 255 255 / .08);
+    --shape-negative-4: rgb(232 68 68 / .17);
+    --shape-primary-4: rgb(50 120 240 / .20);
+    --shape-positive-4: rgb(28 184 126 / .16);
+    --page: #111111;
+    --card: #1c1c1c;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--text-1);
+  font: 400 13px/1.35 Lato, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  padding: 48px 16px;
+}
+.icon {
+  display: inline-block;
+  flex: none;
+  width: var(--icon, 16px);
+  height: var(--icon, 16px);
+  background: currentColor;
+  -webkit-mask: var(--src) center / contain no-repeat;
+  mask: var(--src) center / contain no-repeat;
+}
+.i-download { --src: url(icons/download.svg); }
+.i-link     { --src: url(icons/link.svg); }
+.i-alert    { --src: url(icons/alert.svg); }
+.i-check    { --src: url(icons/check.svg); }
+.i-refresh  { --src: url(icons/refresh.svg); }
+.i-x        { --src: url(icons/x.svg); }
+
+main {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+header h1 { margin: 0 0 var(--space-s); font: 600 16px/1.35 Lato, sans-serif; } /* App/Headline-Semibold */
+header p  { margin: 0; color: var(--text-3); font-size: 12px; }                   /* App/P3-Regular */
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Text field */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font: 600 12px/1.35 Lato, sans-serif; }
+.field-box {
+  height: 28px;
+  padding: 0 8px;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  background: var(--shape-neutral-4);
+  box-shadow: inset 0 0 0 1px transparent;
+  color: var(--text-3);
+}
+.field-box:hover { box-shadow: inset 0 0 0 1px var(--shape-neutral-2); }
+.field-box:focus-within { box-shadow: inset 0 0 0 1px var(--shape-primary); }
+.field.error .field-box { box-shadow: inset 0 0 0 1px var(--shape-negative); }
+.field input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  color: var(--text-1);
+  font: 400 13px/1.35 Lato, sans-serif;
+  caret-color: var(--shape-primary);
+}
+.field input::placeholder { color: var(--text-placeholder); }
+.field .err-icon { display: none; color: var(--text-negative); }
+.field.error .err-icon { display: inline-block; }
+.field .footer { min-height: 15px; font-size: 11px; color: var(--text-3); }
+.field.error .footer { color: var(--text-negative); }
+.clear {
+  display: none;
+  border: 0; padding: 0; background: none; cursor: pointer;
+  color: var(--text-3);
+}
+.field-box:focus-within .clear.show, .field.error .clear.show { display: inline-flex; }
+
+/* Video preview */
+.preview { display: flex; gap: var(--space-2xl); align-items: flex-start; }
+.preview[hidden] { display: none; }
+.thumb {
+  width: 128px; aspect-ratio: 16 / 9; flex: none;
+  border-radius: 8px; object-fit: cover;
+  background: var(--shape-neutral-4);
+}
+.meta { min-width: 0; display: flex; flex-direction: column; gap: var(--space-s); }
+.meta .title { font: 600 14px/1.35 Lato, sans-serif; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.meta .sub { font-size: 12px; color: var(--text-3); }
+.meta .lic { font-size: 11px; color: var(--text-3); }
+.skeleton .thumb, .skeleton .title, .skeleton .sub { color: transparent; background: var(--shape-neutral-4); border-radius: 4px; }
+.skeleton .title { width: 260px; }
+.skeleton .sub { width: 140px; }
+
+/* Pills */
+.group { display: flex; flex-direction: column; gap: 6px; }
+.group > span { font: 600 12px/1.35 Lato, sans-serif; }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill {
+  height: 32px;
+  padding: 0 14px;
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--shape-neutral-4);
+  box-shadow: inset 0 0 0 1px transparent;
+  color: var(--text-1);
+  font: 600 14px/1.35 Lato, sans-serif;
+  cursor: pointer;
+}
+.pill:hover { box-shadow: inset 0 0 0 1px var(--shape-neutral-2); }
+.pill:is([aria-pressed="true"], [aria-checked="true"]) {
+  background: var(--shape-primary-4);
+  box-shadow: inset 0 0 0 1px var(--shape-primary);
+  color: var(--text-primary);
+}
+.pill .icon { display: none; }
+.pill[aria-pressed="true"] .icon { display: inline-block; }
+.pill:disabled { opacity: .4; cursor: default; }
+.hint { font-size: 11px; color: var(--text-3); min-height: 15px; }
+.quality[hidden] { display: none; }
+
+/* Buttons */
+.actions { display: flex; gap: var(--space-2xl); flex-wrap: wrap; }
+.btn {
+  height: 40px;
+  padding: 0 12px;      /* padX 10 + 2px spacer */
+  border-radius: 8px;
+  border: 0;
+  display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+  font: 600 16px/1.35 Lato, sans-serif;
+  cursor: pointer;
+  --icon: 20px;
+  text-decoration: none;
+}
+.btn .icon { -webkit-mask-size: 16.67px; mask-size: 16.67px; }
+.btn-primary { background: var(--shape-primary); color: var(--shape-on-primary); }
+.btn-secondary { background: var(--shape-neutral-4); color: var(--text-1); }
+.btn-ghost { background: none; color: var(--text-primary); }
+.btn:disabled { opacity: .4; cursor: default; }
+.btn-block { width: 100%; }
+
+/* Visible keyboard focus (WCAG 2.4.7) */
+:is(.btn, .pill, .clear):focus-visible { outline: 2px solid var(--shape-primary); outline-offset: 2px; }
+
+/* Progress */
+.progress { display: flex; flex-direction: column; gap: 8px; }
+.progress[hidden] { display: none; }
+.progress-row { display: flex; justify-content: space-between; gap: var(--space-2xl); font-size: 12px; }
+.progress-row .stats { color: var(--text-3); font-variant-numeric: tabular-nums; }
+.bar { height: 6px; border-radius: 3px; background: var(--shape-neutral-3); overflow: hidden; }
+.bar > div { height: 100%; width: 0; background: var(--shape-primary); border-radius: inherit; transition: width .3s ease-out; }
+.bar.indeterminate > div { width: 30%; animation: slide 1.1s ease-in-out infinite; }
+@keyframes slide { from { transform: translateX(-100%); } to { transform: translateX(340%); } }
+@media (prefers-reduced-motion: reduce) { .bar.indeterminate > div { animation: none; width: 100%; opacity: .5; } }
+
+/* Info boxes */
+.infobox {
+  display: flex; gap: 6px; align-items: flex-start;
+  padding: var(--space-2xl);
+  border-radius: 8px;
+  font-size: 12px;
+  --icon: 20px;
+}
+.infobox[hidden] { display: none; }
+.infobox .icon { -webkit-mask-size: 16.67px; mask-size: 16.67px; }
+.infobox strong { display: block; font: 600 14px/1.35 Lato, sans-serif; margin-bottom: 6px; }
+.infobox.error { background: var(--shape-negative-4); box-shadow: inset 0 0 0 1px var(--shape-negative-4); color: var(--text-negative); }
+.infobox.success { background: var(--shape-positive-4); color: var(--text-positive); }
+.infobox p { margin: 0; word-break: break-word; }
+.files { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.files li { display: flex; align-items: center; gap: var(--space-2xl); }
+.files .f-meta { flex: 1; min-width: 0; }
+.files .f-name { color: var(--text-1); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.files .f-sub { color: var(--text-3); font-size: 11px; }
+.btn-m { height: 32px; padding: 0 10px; border-radius: 6px; font-size: 14px; --icon: 16px; flex: none; } /* Button M */
+.btn-m .icon { -webkit-mask-size: 13.33px; mask-size: 13.33px; }
+
+footer { font-size: 11px; color: var(--text-3); text-align: center; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>YouTube converter</h1>
+    <p>Save a video as MP3 audio or MP4 video. Runs on this Mac with yt-dlp and FFmpeg.</p>
+  </header>
+
+  <section class="card">
+    <form class="field" id="field" autocomplete="off">
+      <label for="url">Video link</label>
+      <div class="field-box">
+        <span class="icon i-link" aria-hidden="true"></span>
+        <input id="url" name="url" type="url" inputmode="url" spellcheck="false"
+               placeholder="https://www.youtube.com/watch?v=…" aria-describedby="url-footer">
+        <span class="icon i-alert err-icon" aria-hidden="true"></span>
+        <button type="button" class="clear" id="clear" aria-label="Clear link"><span class="icon i-x" style="--icon:12px"></span></button>
+      </div>
+      <div class="footer" id="url-footer" aria-live="polite">Paste a link and press Enter.</div>
+    </form>
+
+    <div class="preview" id="preview" hidden>
+      <img class="thumb" id="thumb" alt="">
+      <div class="meta">
+        <div class="title" id="title">&nbsp;</div>
+        <div class="sub" id="sub">&nbsp;</div>
+        <div class="lic" id="lic"></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <span id="fmt-label">Format <span style="font-weight:400;color:var(--text-3)">· pick one or both</span></span>
+      <div class="pills" role="group" aria-labelledby="fmt-label" id="formats">
+        <button type="button" class="pill" aria-pressed="true" data-value="mp3"><span class="icon i-check" aria-hidden="true"></span>MP3 audio</button>
+        <button type="button" class="pill" aria-pressed="false" data-value="mp4"><span class="icon i-check" aria-hidden="true"></span>MP4 video</button>
+      </div>
+    </div>
+
+    <div class="group quality" id="q-mp3">
+      <span id="q-mp3-label">MP3 quality</span>
+      <div class="pills" role="radiogroup" aria-labelledby="q-mp3-label"></div>
+      <div class="hint">YouTube audio is about 130–160 kbps, so 320 kbps makes a bigger file, not a better one.</div>
+    </div>
+
+    <div class="group quality" id="q-mp4" hidden>
+      <span id="q-mp4-label">MP4 resolution</span>
+      <div class="pills" role="radiogroup" aria-labelledby="q-mp4-label"></div>
+      <div class="hint"></div>
+    </div>
+
+    <div class="hint" id="dest">Saved to Downloads › YouTube Converter › MP3</div>
+
+    <button class="btn btn-primary btn-block" id="convert" disabled>
+      <span class="icon i-download" aria-hidden="true"></span>Convert
+    </button>
+
+    <div class="progress" id="progress" hidden aria-live="polite">
+      <div class="progress-row"><span id="p-label">Starting…</span><span class="stats" id="p-stats"></span></div>
+      <div class="bar" id="bar" role="progressbar" aria-labelledby="p-label" aria-valuemin="0" aria-valuemax="100"><div></div></div>
+    </div>
+
+    <div class="infobox success" id="done" hidden>
+      <span class="icon i-check" aria-hidden="true"></span>
+      <div style="flex:1;min-width:0">
+        <strong>Saved</strong>
+        <ul class="files" id="files"></ul>
+        <div class="actions" style="margin-top:12px">
+          <button class="btn btn-ghost" id="again" type="button"><span class="icon i-refresh" aria-hidden="true"></span>Convert another</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="infobox error" id="error" hidden role="alert">
+      <span class="icon i-alert" aria-hidden="true"></span>
+      <div><strong>Couldn't convert</strong><p id="error-msg"></p></div>
+    </div>
+  </section>
+
+  <footer>Only download videos you own or have permission to use, such as Creative Commons content.</footer>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const MP3 = [["128", "128 kbps"], ["192", "192 kbps"], ["320", "320 kbps"]];
+const state = { info: null, formats: new Set(["mp3"]), quality: { mp3: "192", mp4: "1080" }, busy: false, infoReq: 0 };
+
+async function api(path, body) {
+  const res = await fetch(path, body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : {});
+  const data = await res.json().catch(() => ({ error: "The server didn't respond properly." }));
+  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+  return data;
+}
+
+function fmtDuration(s) {
+  if (!s && s !== 0) return "";
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = String(Math.floor(s % 60)).padStart(2, "0");
+  return h ? `${h}:${String(m).padStart(2, "0")}:${sec}` : `${m}:${sec}`;
+}
+function fmtBytes(b) {
+  if (!b) return "";
+  const u = ["B", "KB", "MB", "GB"]; let i = 0;
+  while (b >= 1024 && i < u.length - 1) { b /= 1024; i++; }
+  return `${b.toFixed(i ? 1 : 0)} ${u[i]}`;
+}
+
+function setFieldError(msg) {
+  $("field").classList.toggle("error", !!msg);
+  $("url").setAttribute("aria-invalid", msg ? "true" : "false");
+  $("url-footer").textContent = msg || (state.info ? "" : "Paste a link and press Enter.");
+}
+
+// Single-choice pills (role=radio inside a radiogroup).
+function renderRadioPills(el, options, selected, onPick) {
+  el.replaceChildren(...options.map(([value, label]) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "pill"; b.setAttribute("role", "radio"); b.dataset.value = value; b.textContent = label;
+    b.setAttribute("aria-checked", String(value === selected));
+    b.tabIndex = value === selected ? 0 : -1;
+    b.disabled = state.busy;
+    b.onclick = () => onPick(value);
+    return b;
+  }));
+}
+
+// Arrow-key navigation inside a radiogroup.
+document.addEventListener("keydown", (e) => {
+  const group = e.target.closest?.('[role="radiogroup"]');
+  if (!group || !["ArrowLeft", "ArrowRight"].includes(e.key)) return;
+  const items = [...group.querySelectorAll('[role="radio"]')];
+  const i = items.indexOf(e.target) + (e.key === "ArrowRight" ? 1 : -1);
+  const next = items[(i + items.length) % items.length];
+  next.click(); group.querySelector(`[data-value="${next.dataset.value}"]`)?.focus();
+});
+
+function defaultHeight() {
+  const hs = state.info?.heights || [];
+  return String(hs.find((h) => h <= 1080) || hs[hs.length - 1] || 1080);
+}
+
+function renderControls() {
+  // Format: multi-select toggle pills; at least one stays on.
+  for (const b of $("formats").querySelectorAll(".pill")) {
+    const on = state.formats.has(b.dataset.value);
+    b.setAttribute("aria-pressed", String(on));
+    b.disabled = state.busy || (on && state.formats.size === 1);
+  }
+
+  const mp3On = state.formats.has("mp3"), mp4On = state.formats.has("mp4");
+  $("q-mp3").hidden = !mp3On;
+  $("q-mp4").hidden = !mp4On;
+  if (mp3On) {
+    renderRadioPills($("q-mp3").querySelector(".pills"), MP3, state.quality.mp3, (v) => { state.quality.mp3 = v; renderControls(); });
+  }
+  if (mp4On) {
+    const heights = (state.info?.heights || [1080, 720, 480, 360]).filter((h) => h >= 360).slice(0, 5).reverse();
+    if (!heights.includes(Number(state.quality.mp4))) state.quality.mp4 = defaultHeight();
+    renderRadioPills($("q-mp4").querySelector(".pills"), heights.map((h) => [String(h), h >= 2160 ? "4K" : `${h}p`]),
+      state.quality.mp4, (v) => { state.quality.mp4 = v; renderControls(); });
+    $("q-mp4").querySelector(".hint").textContent = Number(state.quality.mp4) > 1080
+      ? "Above 1080p YouTube only has VP9/AV1 video, which some players (like QuickTime) can't open."
+      : "H.264 + AAC: plays everywhere, no re-encoding.";
+  }
+
+  const folders = [...state.formats].sort().map((f) => f.toUpperCase());
+  $("dest").textContent = `Saved to Downloads › YouTube Converter › ${folders.join(" and ")}`;
+  $("convert").disabled = !state.info || state.busy;
+}
+
+$("formats").addEventListener("click", (e) => {
+  const b = e.target.closest(".pill");
+  if (!b || b.disabled) return;
+  const f = b.dataset.value;
+  if (state.formats.has(f)) state.formats.delete(f); else state.formats.add(f);
+  renderControls();
+});
+
+async function loadInfo() {
+  const url = $("url").value.trim();
+  $("error").hidden = true;
+  if (!url) { state.info = null; $("preview").hidden = true; setFieldError(""); renderControls(); return; }
+  if (state.info && state.info._input === url) return;
+
+  const req = ++state.infoReq;
+  state.info = null;
+  renderControls();
+  $("preview").hidden = false;
+  $("preview").classList.add("skeleton");
+  $("thumb").removeAttribute("src");
+  setFieldError("");
+  $("url-footer").textContent = "Looking up video…";
+  try {
+    const info = await api("/api/info", { url });
+    if (req !== state.infoReq) return;
+    info._input = url;
+    state.info = info;
+    $("thumb").src = info.thumbnail || "";
+    $("title").textContent = info.title;
+    $("sub").textContent = [info.channel, fmtDuration(info.duration)].filter(Boolean).join(" · ");
+    $("lic").textContent = info.license || "";
+    $("preview").classList.remove("skeleton");
+    setFieldError("");
+    state.quality.mp4 = defaultHeight();
+  } catch (err) {
+    if (req !== state.infoReq) return;
+    $("preview").hidden = true;
+    setFieldError(err.message);
+  }
+  renderControls();
+}
+
+function showProgress(job) {
+  const bar = $("bar");
+  const p = job.percent || 0;
+  const fmt = (job.current || "").toUpperCase();
+  const prefix = job.tasks > 1 ? `${fmt} (${job.task} of ${job.tasks}) · ` : "";
+  const labels = {
+    queued: "Starting…",
+    downloading: job.streams > 1 ? `Downloading ${job.stream === 1 ? "video" : "audio"}` : "Downloading audio",
+    converting: "Converting to MP3…",
+    merging: "Combining video and audio…",
+  };
+  $("p-label").textContent = prefix + (labels[job.phase] || "Working…");
+  $("p-stats").textContent = job.phase === "downloading"
+    ? [`${Math.round(p)}%`, job.speed ? `${fmtBytes(job.speed)}/s` : "", job.eta != null ? `${fmtDuration(job.eta)} left` : ""].filter(Boolean).join(" · ")
+    : "";
+  const indeterminate = ["queued", "converting", "merging"].includes(job.phase);
+  bar.classList.toggle("indeterminate", indeterminate);
+  bar.firstElementChild.style.width = indeterminate ? "" : `${p}%`;
+  bar.setAttribute("aria-valuenow", String(Math.round(p)));
+}
+
+function setBusy(busy) {
+  state.busy = busy;
+  $("url").disabled = busy;
+  renderControls();
+}
+
+function renderFiles(jobId, files) {
+  $("files").replaceChildren(...files.map((f, i) => {
+    const li = document.createElement("li");
+    const meta = document.createElement("div"); meta.className = "f-meta";
+    const name = document.createElement("div"); name.className = "f-name"; name.textContent = f.name; name.title = f.name;
+    const sub = document.createElement("div"); sub.className = "f-sub"; sub.textContent = `${f.folder} · ${fmtBytes(f.size)}`;
+    meta.append(name, sub);
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.className = "btn btn-secondary btn-m"; btn.textContent = "Show in Finder";
+    btn.onclick = () => api(`/api/jobs/${jobId}/reveal/${i}`, {}).catch((err) => { sub.textContent = err.message; });
+    li.append(meta, btn);
+    return li;
+  }));
+}
+
+async function convert() {
+  if (!state.info || state.busy) return;
+  $("error").hidden = true; $("done").hidden = true;
+  setBusy(true);
+  $("progress").hidden = false;
+  showProgress({ phase: "queued" });
+  let id, job;
+  try {
+    const outputs = [...state.formats].map((f) => ({ format: f, quality: state.quality[f] }));
+    ({ id } = await api("/api/jobs", { url: state.info.url, outputs }));
+    do {
+      await new Promise((r) => setTimeout(r, 600));
+      job = await api(`/api/jobs/${id}`);
+      showProgress(job);
+    } while (job.phase !== "done" && job.phase !== "error");
+    if (job.phase === "error") throw new Error(job.error);
+  } catch (err) {
+    $("error-msg").textContent = job?.files?.length
+      ? `${err.message} (${job.files.map((f) => f.format.toUpperCase()).join(", ")} was saved.)`
+      : err.message;
+    $("error").hidden = false;
+  } finally {
+    $("progress").hidden = true;
+    if (job?.files?.length) { renderFiles(id, job.files); $("done").hidden = false; }
+    setBusy(false);
+  }
+}
+
+$("field").addEventListener("submit", (e) => { e.preventDefault(); loadInfo(); });
+$("url").addEventListener("paste", () => setTimeout(loadInfo, 0));
+$("url").addEventListener("blur", loadInfo);
+$("url").addEventListener("input", () => {
+  $("clear").classList.toggle("show", !!$("url").value);
+  if ($("field").classList.contains("error")) setFieldError("");
+});
+$("clear").addEventListener("click", () => { $("url").value = ""; $("clear").classList.remove("show"); $("url").focus(); loadInfo(); });
+$("convert").addEventListener("click", convert);
+$("again").addEventListener("click", () => {
+  $("done").hidden = true; $("url").value = ""; $("clear").classList.remove("show");
+  state.info = null; $("preview").hidden = true; setFieldError(""); renderControls(); $("url").focus();
+});
+
+renderControls();
+</script>
+</body>
+</html>
